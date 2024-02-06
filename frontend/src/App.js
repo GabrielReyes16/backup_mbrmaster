@@ -8,7 +8,8 @@ import Ventas from './components/Ventas';
 import Compras from './components/Compras';
 import Almacen from './components/Almacen';
 import Finanzas from './components/Finanzas';
-import Recursos_Humanos from './components/Recursos_Humanos';
+import RecursosHumanos from './components/RecursosHumanos'; 
+import Organizacion from './components/Organizacion';
 import Consultas from './components/Consultas';
 import NuevaUnidad from './components/NuevaUnidad';
 import NuevaArea from './components/NuevaArea';
@@ -20,13 +21,10 @@ function App() {
         <AuthProvider>
           <AuthContext.Consumer>
               {({ isAuthenticated }) => (
-                  isAuthenticated &&<Login />
+                  isAuthenticated && <Login />
               )}
           </AuthContext.Consumer>
         <Routes>
-        <Route path="/api/consultar" element={<Consultas />} />
-        <Route path="/api/nueva_unidad" element={<NuevaUnidad />} />
-        <Route path="/api/nueva_area" element={<NuevaArea />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/menu/maestro" element={<Maestro />} />
         <Route path="/menu/gastos" element={<Gastos />} />
@@ -34,7 +32,11 @@ function App() {
         <Route path="/menu/compras" element={<Compras />} />
         <Route path="/menu/almacen" element={<Almacen />} />
         <Route path="/menu/finanzas" element={<Finanzas />} />
-        <Route path="/menu/recursos_humanos" element={<Recursos_Humanos />} />
+        <Route path="/menu/recursos_humanos" element={<RecursosHumanos />} />
+        <Route path="/menu/maestro/organizacion" element={<Organizacion />} />
+        <Route path="/menu/maestro/organizacion/consultar" element={<Consultas />} />
+        <Route path="/menu/maestro/organizacion/nueva_unidad" element={<NuevaUnidad />} />
+        <Route path="/menu/maestro/organizacion/nueva_area" element={<NuevaArea />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>

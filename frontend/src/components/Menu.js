@@ -20,9 +20,9 @@ const Menu = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link to="/menu" className="navbar-brand">
             Dashboard
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"

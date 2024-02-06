@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api';
 
 const NuevaArea = () => {
@@ -34,12 +35,12 @@ const NuevaArea = () => {
 
   return (
     <div>
-      {/* Nuevo Navbar */}
+      {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link to="/menu" className="navbar-brand">
             Dashboard
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -53,20 +54,21 @@ const NuevaArea = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link active" aria-current="page" href="Maestro.html">
+              <Link to="/menu/maestro" className="nav-link">
                 Maestro
-              </a>
-              <a className="nav-link" href="Organizacion.html">
+              </Link>
+              <Link to="/menu/maestro/organizacion" className="nav-link">
                 Organizacion
-              </a>
-              <a className="nav-link disabled" aria-disabled="true">
+              </Link>
+              {/* Use a button instead of an anchor for a disabled link */}
+              <button className="nav-link disabled" aria-disabled="true">
                 Nueva Area
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </nav>
-
+      <hr />
       {/* Contenedor del formulario */}
       <div className="container mt-4">
         <div className="card">
