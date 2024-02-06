@@ -1,26 +1,19 @@
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from django.http import Http404
 from django.http import JsonResponse
-from rest_framework import permissions, status
+from django.shortcuts import render
+from rest_framework import permissions, status, viewsets, generics
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
-
-from .models import users, Unidad, Area
-from .serializer import UserSerializer, UnidadSerializer, AreaSerializer, MyTokenObtainPairSerializer, RegisterSerializer
-
-# Create your views here.
-#Authentication
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .models import Unidad, Area, Banco
+from .serializer import UnidadSerializer, AreaSerializer, BancoSerializer
+
+
+#Authentication
+from .models import User, Profile
+from .serializer import UserSerializer,MyTokenObtainPairSerializer, RegisterSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -28,7 +21,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 class RegisterView(generics.CreateAPIView):
-    queryset = users.objects.all()
+    queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
@@ -38,9 +31,9 @@ class RegisterView(generics.CreateAPIView):
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
-        '/mbr_master/token/',
-        '/mbr_master/register/',
-        '/mbr_master/token/refresh/'
+        '/tampus_admin/token/',
+        '/tampus_admin/register/',
+        '/tampus_admin/token/refresh/'
     ]
     return Response(routes)
 
@@ -60,11 +53,6 @@ def testEndPoint(request):
 
 #App views
 
-
-from .models import *
-from .serializer import *
-# Create your views here.
-
 class bancoView(viewsets.ModelViewSet):
     serializer_class=BancoSerializer
     queryset=Banco.objects.all()
@@ -72,7 +60,7 @@ class bancoView(viewsets.ModelViewSet):
 
 class usersView(APIView):
     def get(self, request):
-        Users = users.objects.all()
+        Users = User.objects.all()
         serializer = UserSerializer(Users, many=True)
         return Response(serializer.data)
 
@@ -88,8 +76,8 @@ class usersView(APIView):
 class usersDetail(APIView):
     def get_object(self, pk):
         try:
-            return users.objects.get(pk=pk)
-        except users.DoesNotExist:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
             raise Http404
 
     def get(self, request, pk):

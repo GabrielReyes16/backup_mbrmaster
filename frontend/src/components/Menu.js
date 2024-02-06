@@ -15,6 +15,7 @@ const Menu = () => {
     var username = decode.username
     var email = decode.email
   }
+  const location = useLocation()
   return (
     <div>
       {/* Navbar */}
@@ -60,6 +61,7 @@ const Menu = () => {
               <button onClick={logoutUser} className="nav-link" >
                 Cerrar sesión
               </button>
+             <button><a className="dropdown-item" style={{cursor:"pointer"}}>{username} Nombre del usuario</a></button>
             </div>
           </div>
         </div>
