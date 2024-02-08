@@ -40,15 +40,17 @@ def save_user_profile(sender, instance, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)
 
-#Modelos varios
 
+#Modelo de unidades
 class Unidad(models.Model):
     nombre = models.CharField(max_length=255)
 
+#Modelo de areas
 class Area(models.Model):
     unidad = models.ForeignKey(Unidad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255)
 
+#Modelo de bancos
 class Banco(models.Model):
     nombre = models.CharField(max_length=100)
     moneda = models.CharField(max_length=50)
@@ -62,3 +64,26 @@ class Banco(models.Model):
 
     def __str__(self):
         return self.nombre
+
+# #Modelos usados en recursos humanos
+# class tipo_documento(models.Model):
+#     nombre = models.CharField(max_length=100)
+
+#     def __str__(self):
+#         return self.nombre
+    
+# class Empleado(models.Model):
+#     nombres = models.CharField(max_length=100)
+#     primer_apellido = models.CharField(max_length=100)
+#     segundo_apellido = models.CharField(max_length=100)
+#     doc_identidad = models.ForeignKey(tipo_documento, on_delete=models.CASCADE) 
+#     fecha_nacimiento = models.DateField()
+#     fecha_ingreso = models.DateField()
+#     fecha_salida = models.DateField()
+#     cargo = models.CharField(max_length=100)
+#     area = models.ForeignKey(Area, on_delete=models.CASCADE)
+#     unidad = models.ForeignKey(Unidad, on_delete=models.CASCADE)
+#     estado = models.CharField(max_length=20)
+
+#     def __str__(self):
+#         return self.nombre
