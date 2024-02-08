@@ -1,24 +1,22 @@
-import React, {Component, useContext, useState} from 'react';
-import { useLocation , Link, Outlet} from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-import useAxios from '../utils/useAxios'
+import React, { useContext } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
 const Menu = () => {
-  const [res, setRes] = useState("")
-  const token = localStorage.getItem("authTokens")
-  const api = useAxios();
-  const {user, logoutUser} = useContext(AuthContext)
-  if (token) {
-    const decode = jwtDecode(token)
-    var user_id = decode.id
-    var username = decode.username
-    var email = decode.email
-  }
+  const { logoutUser } = useContext(AuthContext);
+
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link to="/menu" className="navbar-brand">
             Dashboard
@@ -57,7 +55,7 @@ const Menu = () => {
               <Link to="/menu/recursos_humanos" className="nav-link">
                 Recursos Humanos
               </Link>
-              <button onClick={logoutUser} className="nav-link" >
+              <button onClick={logoutUser} className="nav-link">
                 Cerrar sesión
               </button>
             </div>

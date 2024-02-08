@@ -6,6 +6,7 @@ const NuevaArea = () => {
   const [nombreArea, setNombreArea] = useState('');
   const [unidades, setUnidades] = useState([]);
   const [selectedUnidad, setSelectedUnidad] = useState('');
+  const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
     const fetchUnidades = async () => {
@@ -28,15 +29,28 @@ const NuevaArea = () => {
 
       setNombreArea('');
       setSelectedUnidad('');
+      setMensaje('Área guardada correctamente.');
+      setTimeout(() => {
+        setMensaje('');
+      }, 3000); 
     } catch (error) {
       console.error('Error al guardar nueva área:', error);
+      setMensaje('Error al guardar el área. Por favor, inténtalo de nuevo.');
     }
   };
 
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link to="/menu" className="navbar-brand">
             Dashboard
@@ -74,6 +88,9 @@ const NuevaArea = () => {
         <div className="card">
           <div className="card-body">
             <h2 className="card-title mb-4">Nueva Área</h2>
+            {mensaje && <div className={`alert ${mensaje.includes('correctamente') ? 'alert-success' : 'alert-danger'}`} role="alert">
+              {mensaje}
+            </div>}
             <div className="mb-3">
               <label className="form-label">Nombre de la Área:</label>
               <input
@@ -98,9 +115,14 @@ const NuevaArea = () => {
                 ))}
               </select>
             </div>
-            <button className="btn btn-primary" onClick={handleGuardar}>
-              Guardar
-            </button>
+            <div className="d-flex justify-content-between">
+              <button className="btn btn-primary" onClick={handleGuardar}>
+                Guardar
+              </button>
+              <Link to="/menu/maestro/organizacion" className="btn btn-secondary">
+                Regresar
+              </Link>
+            </div>
           </div>
         </div>
       </div>

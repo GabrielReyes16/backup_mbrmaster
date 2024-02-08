@@ -5,7 +5,15 @@ const Recursos_Humanos = () => {
     return (
       <div>
         {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
+        <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link to="/menu" className="navbar-brand">
             Dashboard
@@ -49,76 +57,72 @@ const Recursos_Humanos = () => {
           </div>
         </nav>
       <hr />
-      <div className="row">
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Tipo de Documento</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Tipo de Documento</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Sistema de Pensiones</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Sistema de Pensiones</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Estado Civil</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Estado Civil</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Nivel Académico</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Nivel Académico</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Idiomas</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Idiomas</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Nivel</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
-              </Link>
+          <div className="col-md-4 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Nivel</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
             </div>
           </div>
         </div>
