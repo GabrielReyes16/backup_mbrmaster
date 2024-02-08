@@ -58,7 +58,6 @@ const Menu = () => {
               <button onClick={logoutUser} className="nav-link">
                 Cerrar sesión
               </button>
-             <button><a className="dropdown-item" style={{cursor:"pointer"}}>{username} Nombre del usuario</a></button>
             </div>
           </div>
         </div>

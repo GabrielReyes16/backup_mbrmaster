@@ -14,6 +14,7 @@ import Consultas from './components/Consultas';
 import NuevaUnidad from './components/NuevaUnidad';
 import NuevaArea from './components/NuevaArea';
 import Login from './components/Login';
+import Stock from './components/almacen/stock';
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
         <Route path="/menu/maestro/organizacion/consultar" element={<Consultas />} />
         <Route path="/menu/maestro/organizacion/nueva_unidad" element={<NuevaUnidad />} />
         <Route path="/menu/maestro/organizacion/nueva_area" element={<NuevaArea />} />
+        {/* rutas de almacen */}
+        <Route path="/menu/almacen/stock" element={<Stock />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>

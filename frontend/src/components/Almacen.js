@@ -34,24 +34,10 @@ const Almacen = () => {
                 <Link to="/menu/maestro" className="nav-link">
                   Maestro
                 </Link>
-                <Link to="/menu/gastos" className="nav-link">
-                  Gastos
-                </Link>
-                <Link to="/menu/ventas" className="nav-link">
-                  Ventas
-                </Link>
-                <Link to="/menu/compras" className="nav-link">
-                  Compras
-                </Link>
-                <Link to="/menu/almacen" className="nav-link">
-                  Almacen
-                </Link>
-                <Link to="/menu/finanzas" className="nav-link">
-                  Finanzas
-                </Link>
-                <Link to="/menu/recursos_humanos" className="nav-link">
-                  Recursos Humanos
-                </Link>
+                {/* Use a button instead of an anchor for a disabled link */}
+              <button className="nav-link disabled" aria-disabled="true">
+                Almacen
+              </button>
               </div>
             </div>
           </div>
@@ -83,11 +69,11 @@ const Almacen = () => {
           </div>
           <div className="col-md-4 mb-3">
             <div className="card" style={{ width: '18rem' }}>
-              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/h4XoPUPH9wmzqZlVdmDD/h4XoPUPH9wmzqZlVdmDD--1--wy1n1.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">Consulta Stock</h5>
-                <Link to="/menu/usuarios" className="btn btn-primary">
-                  Vamos a Usuarios
+                <Link to="/menu/almacen/stock" className="btn btn-primary">
+                  Consultar
                 </Link>
               </div>
             </div>

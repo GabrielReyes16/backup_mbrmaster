@@ -61,7 +61,7 @@ const Maestro = () => {
         <div className="row">
           <div className="col-md-4 mb-3">
             <div className="card" style={{ width: '18rem' }}>
-              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/5Kcl6XL6X8q9na2ylq8J/5Kcl6XL6X8q9na2ylq8J--1--ynwta.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Clientes" />
               <div className="card-body">
                 <h5 className="card-title">Clientes</h5>
                 <Link to="/menu/usuarios" className="btn btn-primary">
@@ -72,7 +72,7 @@ const Maestro = () => {
           </div>
           <div className="col-md-4 mb-3">
             <div className="card" style={{ width: '18rem' }}>
-              <img src="https://fececo.org.ar/wp-content/uploads/2022/06/personas-usuarios.png" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/nsmNoMOT8szTGoGi0tQP/nsmNoMOT8szTGoGi0tQP--1--jvclb.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Proveedores" />
               <div className="card-body">
                 <h5 className="card-title">Proveedores</h5>
                 <Link to="/menu/tipo_usuarios" className="btn btn-primary">
@@ -83,7 +83,7 @@ const Maestro = () => {
           </div>
           <div className="col-md-4 mb-3">
             <div className="card" style={{ width: '18rem' }}>
-              <img src="https://magautos.cl/wp-content/uploads/2022/07/Reserva.png" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/2pB7lpA8ShNYHWB4f46I/2pB7lpA8ShNYHWB4f46I--1--y1qto.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Bancos" />
               <div className="card-body">
                 <h5 className="card-title">Bancos</h5>
                 <Link to="/menu/reservas" className="btn btn-primary">
@@ -94,7 +94,7 @@ const Maestro = () => {
           </div>
           <div className="col-md-4 mb-3">
           <div className="card" style={{ width: '18rem' }}>
-            <img src="https://elcomercio.pe/resizer/mBGybaqXrcaKEHgxaqqFEVjViK8=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/K6WKL3WUVZG35O7KCDM2X6LHH4.png" className="card-img-top" alt="..." />
+            <img src="https://images.nightcafe.studio/jobs/moCpYJzi9w1yNfVlHBbe/moCpYJzi9w1yNfVlHBbe--1--odmim.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Catalogos</h5>
               <Link to="/menu/paseos" className="btn btn-primary">
@@ -105,7 +105,7 @@ const Maestro = () => {
         </div>
         <div className="col-md-4 mb-3">
           <div className="card" style={{ width: '18rem' }}>
-            <img src="https://s1.eestatic.com/2015/10/12/elandroidelibre/el_androide_libre_71003130_179986200_1706x960.jpg" className="card-img-top" alt="..." />
+            <img src="https://images.nightcafe.studio/jobs/Suc3hMNgRUh2hLthQJSs/Suc3hMNgRUh2hLthQJSs--1--mgkrt.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Organizacion</h5>
               <Link to="/menu/maestro/organizacion" className="btn btn-primary">
@@ -116,7 +116,7 @@ const Maestro = () => {
         </div>
         <div className="col-md-4 mb-3">
           <div className="card" style={{ width: '18rem' }}>
-            <img src="https://conceptodefinicion.de/wp-content/uploads/2019/02/Localizaci%C3%B3n-1.jpg" className="card-img-top" alt="..." />
+            <img src="https://images.nightcafe.studio/jobs/PpxpAmtV6CZJ55ixlDYW/PpxpAmtV6CZJ55ixlDYW--1--kmvzn.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Tablas Generales</h5>
               <Link to="/menu/locacion_propietarios" className="btn btn-primary">
