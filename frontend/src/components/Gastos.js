@@ -2,10 +2,18 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 const Gastos = () => {
-    return (
-      <div>
-        {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body" data-bs-theme="dark">
+  return (
+    <div>
+      {/* Navbar */}
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link to="/menu" className="navbar-brand">
             Dashboard
@@ -21,56 +29,56 @@ const Gastos = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                <Link to="/menu/maestro" className="nav-link">
-                  Maestro
-                </Link>
-                <Link to="/menu/gastos" className="nav-link">
-                  Gastos
-                </Link>
-                <Link to="/menu/ventas" className="nav-link">
-                  Ventas
-                </Link>
-                <Link to="/menu/compras" className="nav-link">
-                  Compras
-                </Link>
-                <Link to="/menu/almacen" className="nav-link">
-                  Almacen
-                </Link>
-                <Link to="/menu/finanzas" className="nav-link">
-                  Finanzas
-                </Link>
-                <Link to="/menu/recursos_humanos" className="nav-link">
-                  Recursos Humanos
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-      <hr />
-      <div className="row">
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Nuevo Ingreso</h5>
-              <p className="card-text">Aqui podrá observar los usuarios registrados.</p>
-              <Link to="/menu/usuarios" className="btn btn-primary">
-                Vamos a Usuarios
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <Link to="/menu/maestro" className="nav-link">
+                Maestro
+              </Link>
+              <Link to="/menu/gastos" className="nav-link">
+                Gastos
+              </Link>
+              <Link to="/menu/ventas" className="nav-link">
+                Ventas
+              </Link>
+              <Link to="/menu/compras" className="nav-link">
+                Compras
+              </Link>
+              <Link to="/menu/almacen" className="nav-link">
+                Almacen
+              </Link>
+              <Link to="/menu/finanzas" className="nav-link">
+                Finanzas
+              </Link>
+              <Link to="/menu/recursos_humanos" className="nav-link">
+                Recursos Humanos
               </Link>
             </div>
           </div>
         </div>
-        <div className="col-md-6 mb-3">
-          <div className="card" style={{ width: '18rem' }}>
-            <img src="https://fececo.org.ar/wp-content/uploads/2022/06/personas-usuarios.png" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Consultas</h5>
-              <p className="card-text">Aqui podrá observar los tipos de usuarios.</p>
-              <Link to="/menu/tipo_usuarios" className="btn btn-primary">
-                Vamos a Tipos de Usuario
-              </Link>
+      </nav>
+      <hr />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Nuevo Ingreso</h5>
+                <Link to="/menu/usuarios" className="btn btn-primary">
+                  Vamos a Usuarios
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 mb-3">
+            <div className="card" style={{ width: '18rem' }}>
+              <img src="https://fececo.org.ar/wp-content/uploads/2022/06/personas-usuarios.png" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">Consultas</h5>
+                <Link to="/menu/tipo_usuarios" className="btn btn-primary">
+                  Vamos a Tipos de Usuario
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -79,5 +87,5 @@ const Gastos = () => {
     </div>
   );
 };
-  
+
 export default Gastos;
