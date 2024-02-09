@@ -10,8 +10,8 @@ from .serializer import UnidadSerializer, AreaSerializer, BancoSerializer
 
 
 #Authentication
-from .models import User, Profile
-from .serializer import UserSerializer,MyTokenObtainPairSerializer, RegisterSerializer
+from .models import *
+from .serializer import *
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
@@ -56,6 +56,42 @@ def testEndPoint(request):
 class bancoView(viewsets.ModelViewSet):
     serializer_class=BancoSerializer
     queryset=Banco.objects.all()
+
+class tipoView(viewsets.ModelViewSet):
+    serializer_class=TipoSerializer
+    queryset=Tipo.objects.all()
+
+class personaView(viewsets.ModelViewSet):
+    serializer_class=PersonaSerializer
+    queryset=Persona.objects.all()
+
+class direccionView(viewsets.ModelViewSet):
+    serializer_class=DireccionSerializer
+    queryset=Direccion.objects.all()
+
+class contactoView(viewsets.ModelViewSet):
+    serializer_class=ContactoSerializer
+    queryset=Contacto.objects.all()
+
+class CuentaBancariaView(viewsets.ModelViewSet):
+    serializer_class=CuentaBancariaSerializer
+    queryset=CuentaBancaria.objects.all()
+
+class impuestoAsociadoView(viewsets.ModelViewSet):
+    serializer_class=ImpuestoAsociadoSerializer
+    queryset=ImpuestoAsociado.objects.all()
+
+class personaImpuestoView(viewsets.ModelViewSet):
+    serializer_class=PersonaImpuestoSerializer
+    queryset=PersonaImpuesto.objects.all()
+
+class tipoPagoView(viewsets.ModelViewSet):
+    serializer_class=TipoPagoSerializer
+    queryset=TipoPago.objects.all()
+
+class personaTipoPagoView(viewsets.ModelViewSet):
+    serializer_class=PersonaTipoPagoSerializer
+    queryset=PersonaTipoPago.objects.all()
 
 
 class usersView(APIView):

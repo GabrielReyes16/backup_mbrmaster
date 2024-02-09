@@ -83,3 +83,48 @@ class BancoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banco
         fields = '__all__'
+
+class TipoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tipo
+        fields = '__all__'
+
+class PersonaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Persona
+        fields = '__all__'
+
+class DireccionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Direccion
+        fields = '__all__'
+
+class ContactoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contacto
+        fields = '__all__'
+
+class CuentaBancariaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CuentaBancaria
+        fields = '__all__'
+
+class ImpuestoAsociadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImpuestoAsociado
+        fields = '__all__'
+
+class PersonaImpuestoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonaImpuesto
+        fields = '__all__'
+
+class TipoPagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoPago
+        fields = '__all__'
+
+class PersonaTipoPagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonaTipoPago
+        fields = '__all__'

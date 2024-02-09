@@ -8,6 +8,16 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 router = routers.DefaultRouter()
 router.register(r"bancos", views.bancoView, "bancos")
+router.register(r"tipos", views.tipoView, "tipos")
+router.register(r"personas", views.personaView, "personas")
+router.register(r"direcciones", views.direccionView, "direcciones")
+router.register(r"contactos", views.contactoView, "contactos")
+router.register(r"cuentasBancarias", views.CuentaBancariaView, "cuentasBancarias")
+router.register(r"impuestosAsociados", views.impuestoAsociadoView, "impuestosAsociados")
+router.register(r"personaImpuestosAsociados", views.personaImpuestoView, "personaImpuestosAsociados")
+router.register(r"tiposPago", views.tipoPagoView, "tiposPago")
+router.register(r"personaTiposPago", views.personaTipoPagoView, "personaTiposPago")
+
 
 urlpatterns = [
     #Autenticación

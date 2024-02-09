@@ -89,3 +89,82 @@ class Banco(models.Model):
 #         return self.nombre
     
 #Modelos de almacen
+class Tipo(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion=models.CharField(max_length=250)
+    def __str__(self):
+        return self.nombre
+
+class Persona(models.Model):
+    ruc_dni = models.CharField(max_length=20, unique=True)
+    nombre_razon_social = models.CharField(max_length=255)
+    fecha_inicio = models.DateField()
+    rubro_actividad_economica = models.CharField(max_length=255)
+    comentarios = models.TextField(blank=True, null=True)
+    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre_razon_social
+
+
+class Direccion(models.Model):
+    direccion = models.CharField(max_length=255)
+    distrito = models.CharField(max_length=100)
+    provincia = models.CharField(max_length=100)
+    departamento = models.CharField(max_length=100)
+    pais = models.CharField(max_length=100)
+    personaId = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='direcciones')
+
+    def __str__(self):
+        return self.direccion
+
+class Contacto(models.Model):
+    nombre=models.CharField(max_length=255)
+    cargo=models.CharField(max_length=100)
+    telefono=models.CharField(max_length=12)
+    correo=models.EmailField()
+    personaId = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='contactos')
+    def __str__(self):
+        return self.nombre
+
+class CuentaBancaria(models.Model):
+    entidad = models.CharField(max_length=100)
+    numero_de_cuenta = models.CharField(max_length=50)
+    cci = models.CharField(max_length=20)
+    tipo_de_cuenta = models.CharField(max_length=20)
+    moneda = models.CharField(max_length=10)
+    personaId = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='cuentas_bancarias')
+
+    def __str__(self):
+        return f"Cuenta bancaria en {self.entidad} - {self.tipo_de_cuenta} - {self.moneda}"
+
+class ImpuestoAsociado(models.Model):
+    impuesto = models.CharField(max_length=100)
+    valor = models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.impuesto
+    
+class PersonaImpuesto(models.Model):
+    personaId = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='persona_impuestosId')
+    impuestoId = models.ForeignKey(ImpuestoAsociado, on_delete=models.CASCADE, related_name='persona_impuestos')
+    def __str__(self):
+        return f'{self.personaId} - {self.impuestoId}'
+    
+    
+class TipoPago(models.Model):
+    tipo=models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True, null=True)
+    def __str__(self):
+        return self.tipo
+
+class PersonaTipoPago(models.Model):
+    personaId = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='persona_tipo_pago_Id')
+    tipoPagoId = models.ForeignKey(TipoPago, on_delete=models.CASCADE, related_name='persona_tipo_pago')
+    def __str__(self):
+        return f'{self.personaId} - {self.tipoPagoId}'
+
+
+    
+
