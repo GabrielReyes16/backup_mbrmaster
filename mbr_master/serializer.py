@@ -2,7 +2,7 @@ from rest_framework import serializers
 #Auth models
 from .models import User, Profile
 #Other models
-from .models import Unidad, Area, Banco, Tipo, Persona, Direccion, Contacto, CuentaBancaria, ImpuestoAsociado, PersonaImpuesto, TipoPago, PersonaTipoPago
+from .models import Unidad, Area, SubArea, Banco, Tipo, Persona, Direccion, Contacto, CuentaBancaria, ImpuestoAsociado, PersonaImpuesto, TipoPago, PersonaTipoPago
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -66,17 +66,20 @@ class RegisterSerializer(serializers.ModelSerializer):
 #App serializers
     
 
+class AreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Area
+        fields = '__all__'
+
+class SubAreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubArea
+        fields = '__all__'
+
 class UnidadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unidad
-        fields = ['id', 'nombre']
-
-class AreaSerializer(serializers.ModelSerializer):
-    unidad_nombre = serializers.ReadOnlyField(source='unidad.nombre')
-
-    class Meta:
-        model = Area
-        fields = ['id', 'nombre', 'unidad', 'unidad_nombre']
+        fields = '__all__'
 
 class BancoSerializer(serializers.ModelSerializer):
     class Meta:

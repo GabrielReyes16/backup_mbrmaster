@@ -36,9 +36,13 @@ urlpatterns = [
     path('users/delete/<int:pk>/', usersDetail.as_view()),
 
     # Rutas para la API
-    path('api/nueva_unidad/', nueva_unidad, name='nueva_unidad_api'),
-    path('api/nueva_area/', nueva_area, name='nueva_area_api'),
-    path('api/consultar/', consultar, name='consultar_api'),
+    path('areas/', area_list, name='area_list'),
+    path('areas/<int:pk>/', area_detail, name='area_detail'),
+    path('subareas/', subarea_list, name='subarea_list'),
+    path('subareas/<int:pk>/', subarea_detail, name='subarea_detail'),
+    path('unidades/', unidad_list, name='unidad_list'),
+    path('unidades/<int:pk>/', unidad_detail, name='unidad_detail'),
+    path('consultar/', views.consultar, name='consultar'),
 
     #Rutas para el Banco
 

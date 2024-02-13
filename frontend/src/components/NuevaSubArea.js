@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 
-const NuevaArea = () => {
-  const [nombreArea, setNombreArea] = useState('');
+const NuevaSubArea = () => {
+  const [nombreSubArea, setNombreSubArea] = useState('');
   const [mensaje, setMensaje] = useState('');
 
   const handleGuardar = async () => {
     try {
-      const datosArea = { nombre: nombreArea };
-      const response = await api.nuevaArea(datosArea);
+      const datosSubArea = { nombre: nombreSubArea };
+      const response = await api.nuevaSubArea(datosSubArea);
       console.log(response);
 
-      setNombreArea('');
-      setMensaje('Área guardada correctamente.');
+      setNombreSubArea('');
+      setMensaje('Subárea guardada correctamente.');
       setTimeout(() => {
         setMensaje('');
       }, 3000); 
     } catch (error) {
-      console.error('Error al guardar nueva área:', error);
-      setMensaje('Error al guardar el área. Por favor, inténtalo de nuevo.');
+      console.error('Error al guardar nueva subárea:', error);
+      setMensaje('Error al guardar la subárea. Por favor, inténtalo de nuevo.');
     }
   };
 
@@ -60,7 +60,7 @@ const NuevaArea = () => {
               </Link>
               {/* Use a button instead of an anchor for a disabled link */}
               <button className="nav-link disabled" aria-disabled="true">
-                Nueva Area
+                Nueva Subárea
               </button>
             </div>
           </div>
@@ -71,20 +71,19 @@ const NuevaArea = () => {
       <div className="container mt-4">
         <div className="card">
           <div className="card-body">
-            <h2 className="card-title mb-4">Nueva Área</h2>
+            <h2 className="card-title mb-4">Nueva Subárea</h2>
             {mensaje && <div className={`alert ${mensaje.includes('correctamente') ? 'alert-success' : 'alert-danger'}`} role="alert">
               {mensaje}
             </div>}
             <div className="mb-3">
-              <label className="form-label">Nombre de la Área:</label>
+              <label className="form-label">Nombre de la Subárea:</label>
               <input
                 type="text"
                 className="form-control"
-                value={nombreArea}
-                onChange={(e) => setNombreArea(e.target.value)}
+                value={nombreSubArea}
+                onChange={(e) => setNombreSubArea(e.target.value)}
               />
             </div>
-       
             <div className="d-flex justify-content-between">
               <button className="btn btn-primary" onClick={handleGuardar}>
                 Guardar
@@ -100,4 +99,4 @@ const NuevaArea = () => {
   );
 };
 
-export default NuevaArea;
+export default NuevaSubArea;

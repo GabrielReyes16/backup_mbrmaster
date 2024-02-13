@@ -29,4 +29,5 @@ class Protegida(APIView):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('mbr/', include('mbr_master.urls')),
 ]

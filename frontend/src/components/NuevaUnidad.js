@@ -1,18 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 
 const NuevaUnidad = () => {
   const [nombreUnidad, setNombreUnidad] = useState('');
   const [mensaje, setMensaje] = useState('');
+  const [areas, setAreas] = useState([]);
+  const [subAreas, setSubAreas] = useState([]);
+  const [selectedArea, setSelectedArea] = useState('');
+  const [selectedSubArea, setSelectedSubArea] = useState('');
+
+  useEffect(() => {
+    cargarAreas();
+    cargarSubAreas();
+  }, []);
+
+  const cargarAreas = async () => {
+    try {
+      const response = await api.obtenerAreas();
+      setAreas(response);
+    } catch (error) {
+      console.error('Error al cargar las áreas:', error);
+    }
+  };
+
+  const cargarSubAreas = async () => {
+    try {
+      const response = await api.obtenerSubAreas();
+      setSubAreas(response);
+    } catch (error) {
+      console.error('Error al cargar las subáreas:', error);
+    }
+  };
 
   const handleGuardar = async () => {
     try {
-      const datosUnidad = { nombre: nombreUnidad };
+      const datosUnidad = { 
+        nombre: nombreUnidad,
+        area: selectedArea,
+        subarea: selectedSubArea,
+      };
       const response = await api.nuevaUnidad(datosUnidad);
       console.log(response);
       setMensaje('Unidad guardada correctamente.');
       setNombreUnidad('');
+      setSelectedArea('');
+      setSelectedSubArea('');
       setTimeout(() => {
         setMensaje('');
       }, 3000);
@@ -84,6 +117,32 @@ const NuevaUnidad = () => {
                     value={nombreUnidad}
                     onChange={(e) => setNombreUnidad(e.target.value)}
                   />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Área:</label>
+                  <select
+                    className="form-select"
+                    value={selectedArea}
+                    onChange={(e) => setSelectedArea(e.target.value)}
+                  >
+                    <option value="">Seleccionar Área</option>
+                    {areas.map(area => (
+                      <option key={area.id} value={area.id}>{area.nombre}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Subárea:</label>
+                  <select
+                    className="form-select"
+                    value={selectedSubArea}
+                    onChange={(e) => setSelectedSubArea(e.target.value)}
+                  >
+                    <option value="">Seleccionar Subárea</option>
+                    {subAreas.map(subArea => (
+                      <option key={subArea.id} value={subArea.id}>{subArea.nombre}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="d-flex justify-content-between">
                   <button className="btn btn-primary" onClick={handleGuardar}>

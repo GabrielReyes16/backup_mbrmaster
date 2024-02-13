@@ -41,14 +41,28 @@ post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)
 
 
-#Modelo de unidades
-class Unidad(models.Model):
+# Modelo de áreas
+class Area(models.Model):
     nombre = models.CharField(max_length=255)
 
-#Modelo de areas
-class Area(models.Model):
-    unidad = models.ForeignKey(Unidad, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.nombre
+
+# Modelo de subáreas
+class SubArea(models.Model):
     nombre = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nombre
+
+# Modelo de unidades
+class Unidad(models.Model):
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    subarea = models.ForeignKey(SubArea, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nombre
 
 #Modelo de bancos
 class Banco(models.Model):

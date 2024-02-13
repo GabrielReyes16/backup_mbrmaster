@@ -1,12 +1,13 @@
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import permissions, status, viewsets, generics
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .models import Unidad, Area, Banco
-from .serializer import UnidadSerializer, AreaSerializer, BancoSerializer
+from .models import Unidad, Area, SubArea, Banco
+from .serializer import UnidadSerializer, AreaSerializer, SubAreaSerializer, BancoSerializer
 
 
 #Authentication
@@ -136,37 +137,127 @@ class usersDetail(APIView):
         Users.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-@api_view(['POST'])
-def nueva_unidad(request):
-    if request.method == 'POST':
-        serializer = UnidadSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'status': 'success'})
-        else:
-            return Response({'status': 'error', 'errors': serializer.errors}, status=400)
-
-@api_view(['POST'])
-def nueva_area(request):
+@api_view(['POST', 'GET'])
+def area_list(request):
     if request.method == 'POST':
         serializer = AreaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'status': 'success'})
-        else:
-            return Response({'status': 'error', 'errors': serializer.errors}, status=400)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    elif request.method == 'GET':
+        areas = Area.objects.all()
+        serializer = AreaSerializer(areas, many=True)
+        return Response(serializer.data)
 
+@api_view(['GET', 'PUT', 'DELETE'])
+def area_detail(request, pk):
+    try:
+        area = Area.objects.get(pk=pk)
+    except Area.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = AreaSerializer(area)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = AreaSerializer(area, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        area.delete()
+        return Response(status=204)
+
+@api_view(['POST', 'GET'])
+def subarea_list(request):
+    if request.method == 'POST':
+        serializer = SubAreaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    elif request.method == 'GET':
+        subareas = SubArea.objects.all()
+        serializer = SubAreaSerializer(subareas, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def subarea_detail(request, pk):
+    try:
+        subarea = SubArea.objects.get(pk=pk)
+    except SubArea.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = SubAreaSerializer(subarea)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SubAreaSerializer(subarea, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        subarea.delete()
+        return Response(status=204)
+
+@api_view(['POST', 'GET'])
+def unidad_list(request):
+    if request.method == 'POST':
+        serializer = UnidadSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    elif request.method == 'GET':
+        unidades = Unidad.objects.all()
+        serializer = UnidadSerializer(unidades, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def unidad_detail(request, pk):
+    try:
+        unidad = Unidad.objects.get(pk=pk)
+    except Unidad.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UnidadSerializer(unidad)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        print("Datos recibidos para la edición:", request.data)  
+        serializer = UnidadSerializer(unidad, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        unidad.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 @api_view(['GET'])
-def consultar(request):
-    unidades = Unidad.objects.all()
-    areas = Area.objects.all()
-    
-    unidad_serializer = UnidadSerializer(unidades, many=True)
-    area_serializer = AreaSerializer(areas, many=True)
+def consultar(request): 
+    if request.method == 'GET':
+        areas = Area.objects.all()
+        subareas = SubArea.objects.all()
+        unidades = Unidad.objects.all()
+        
+        area_serializer = AreaSerializer(areas, many=True)
+        subarea_serializer = SubAreaSerializer(subareas, many=True)
+        unidad_serializer = UnidadSerializer(unidades, many=True)
 
-    data = {
-        'unidades': unidad_serializer.data,
-        'areas': area_serializer.data,
-    }
-    
-    return Response(data)
+        data = {
+            'areas': area_serializer.data,
+            'subareas': subarea_serializer.data,
+            'unidades': unidad_serializer.data,
+        }
+        
+        return Response(data)

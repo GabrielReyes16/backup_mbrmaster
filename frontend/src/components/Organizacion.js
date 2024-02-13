@@ -44,20 +44,10 @@ const Organizacion = () => {
       <hr />
       {/* Contenedor de tarjetas */}
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-start">
           <div className="col-md-4 mb-3">
             <div className="card">
-              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
-              <div className="card-body">
-                <Link to="/menu/maestro/organizacion/nueva_unidad" className="btn btn-primary">
-                  Nueva Unidad
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-3">
-            <div className="card">
-              <img src="https://i.pinimg.com/474x/c0/d1/da/c0d1da39c107f4f840789bb58b890aeb.jpg" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/VEt2pu90cJcuVOwj0Ztj/VEt2pu90cJcuVOwj0Ztj--1--whk00.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
               <div className="card-body">
                 <Link to="/menu/maestro/organizacion/nueva_area" className="btn btn-primary">
                   Nueva Area
@@ -67,10 +57,50 @@ const Organizacion = () => {
           </div>
           <div className="col-md-4 mb-3">
             <div className="card">
-              <img src="https://fececo.org.ar/wp-content/uploads/2022/06/personas-usuarios.png" className="card-img-top" alt="..." />
+              <img src="https://images.nightcafe.studio/jobs/6jkQ38sOb21mVzfpbsvM/6jkQ38sOb21mVzfpbsvM--1--0q4ey.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <Link to="/menu/maestro/organizacion/nueva_sub_area" className="btn btn-primary">
+                  Nueva SubArea
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <img src="https://images.nightcafe.studio/jobs/OJPcBpr02tOy2ZfHhnWh/OJPcBpr02tOy2ZfHhnWh--1--zjauf.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <Link to="/menu/maestro/organizacion/nueva_unidad" className="btn btn-primary">
+                  Nueva Unidad
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <img src="https://images.nightcafe.studio/jobs/GgQcVgrXKztnL4OFb3Ne/GgQcVgrXKztnL4OFb3Ne--1--ovjpg.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <Link to="/menu/maestro/organizacion/consultar3" className="btn btn-primary">
+                  Consultas areas
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <img src="https://images.nightcafe.studio/jobs/aI9NE1Rb65V0tu6vn9Xe/aI9NE1Rb65V0tu6vn9Xe--1--23dzs.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <Link to="/menu/maestro/organizacion/consultar2" className="btn btn-primary">
+                  Consultas subarea
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <img src="https://images.nightcafe.studio/jobs/FFNS0pcoDyawN23fyYQK/FFNS0pcoDyawN23fyYQK--1--19una.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="..." />
               <div className="card-body">
                 <Link to="/menu/maestro/organizacion/consultar" className="btn btn-primary">
-                  Consultas
+                  Consulta General
                 </Link>
               </div>
             </div>

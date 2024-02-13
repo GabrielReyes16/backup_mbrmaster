@@ -13,6 +13,9 @@ import Organizacion from './components/Organizacion';
 import Consultas from './components/Consultas';
 import NuevaUnidad from './components/NuevaUnidad';
 import NuevaArea from './components/NuevaArea';
+import NuevaSubArea from './components/NuevaSubArea';
+import Consultas2 from './components/Consultas2';
+import Consultas3 from './components/Consultas3';
 import Login from './components/Login';
 import Stock from './components/almacen/stock';
 
@@ -36,8 +39,11 @@ function App() {
         <Route path="/menu/recursos_humanos" element={<RecursosHumanos />} />
         <Route path="/menu/maestro/organizacion" element={<Organizacion />} />
         <Route path="/menu/maestro/organizacion/consultar" element={<Consultas />} />
+        <Route path="/menu/maestro/organizacion/consultar2" element={<Consultas2 />} />
+        <Route path="/menu/maestro/organizacion/consultar3" element={<Consultas3 />} />
         <Route path="/menu/maestro/organizacion/nueva_unidad" element={<NuevaUnidad />} />
         <Route path="/menu/maestro/organizacion/nueva_area" element={<NuevaArea />} />
+        <Route path="/menu/maestro/organizacion/nueva_sub_area" element={<NuevaSubArea />} />
         {/* rutas de almacen */}
         <Route path="/menu/almacen/stock" element={<Stock />} />
           <Route path="/login" element={<Login />} />

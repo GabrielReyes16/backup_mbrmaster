@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../rrhh/ubigeo.js';
-import '../rrhh/jquery.js';
+
 
 const Recursos_Humanos = () => {
  
