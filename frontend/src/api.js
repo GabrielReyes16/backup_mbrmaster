@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/mbr';
+const API_BASE_URL = 'http://127.0.0.1:8000/mbr/api';
 
 const api = {
   async obtenerUnidades() {
@@ -237,6 +237,194 @@ const api = {
       throw error;
     }
   },
+
+  /* Contenido trabajado por Yeffer */
+
+  async listarBancos() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/v1/bancos/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      return data; // Retorna el array de bancos
+    } catch (error) {
+      console.error('Error al listar bancos:', error);
+      throw error;
+    }
+  },
+
+  async listarClientes() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/v1/personas/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const persona = await response.json();
+      return persona; 
+    } catch (error) {
+      console.error('Error al listar bancos:', error);
+      throw error;
+    }
+  },
+
+  async addPersona(datosCliente) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/v1/personas/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosCliente),
+        credentials: 'include',
+      });
+      const clienteAgregado = await response.json();
+      return clienteAgregado;
+    } catch (error) {
+      console.error('Error al añadir cliente:', error);
+      throw error;
+    }
+  },
+
+  async addDireccion(datosDireccion) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/v1/direcciones/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosDireccion),
+        credentials: 'include',
+      });
+      const direccionAgregada = await response.json();
+      return direccionAgregada;
+    } catch (error) {
+      console.error('Error al añadir dirección:', error);
+      throw error;
+    }
+  },
+
+  async addContacto(datosContacto) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/contactos/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosContacto),
+      credentials: 'include',
+    });
+    const contactoAgregado = await response.json();
+    return contactoAgregado;
+  } catch (error) {
+    console.error('Error al añadir contacto:', error);
+    throw error;
+  }
+},
+
+async addCuentaBancaria(datosCuenta) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/cuentasBancarias/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosCuenta),
+      credentials: 'include',
+    });
+    const cuentaAgregada = await response.json();
+    return cuentaAgregada;
+  } catch (error) {
+    console.error('Error al añadir cuenta bancaria:', error);
+    throw error;
+  }
+},
+
+async listarContactos() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/contactos/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const contactos = await response.json();
+    return contactos;
+  } catch (error) {
+    console.error('Error al listar contactos:', error);
+    throw error;
+  }
+},
+
+async listarDirecciones() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/direcciones/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const direcciones = await response.json();
+    return direcciones;
+  } catch (error) {
+    console.error('Error al listar direcciones:', error);
+    throw error;
+  }
+},
+
+async listarTiposPago() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/tiposPago/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const tiposPago = await response.json();
+    return tiposPago;
+  } catch (error) {
+    console.error('Error al listar tipos de pago:', error);
+    throw error;
+  }
+},
+
+
+async addPersonaTipoPago(datosPersonaTipoPago) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaTiposPago/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosPersonaTipoPago),
+      credentials: 'include',
+    });
+    const personaTipoPagoAgregada = await response.json();
+    return personaTipoPagoAgregada;
+  } catch (error) {
+    console.error('Error al añadir el tipo de pago:', error);
+    throw error;
+  }
+},
+/* Contenido trabajado por Yeffer */
+
+
+
+
+
+
+
+
+
 };
 
 

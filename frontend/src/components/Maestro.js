@@ -64,7 +64,7 @@ const Maestro = () => {
               <img src="https://images.nightcafe.studio/jobs/5Kcl6XL6X8q9na2ylq8J/5Kcl6XL6X8q9na2ylq8J--1--ynwta.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Clientes" />
               <div className="card-body">
                 <h5 className="card-title">Clientes</h5>
-                <Link to="/menu/usuarios" className="btn btn-primary">
+                <Link to="/menu/clientes" className="btn btn-primary">
                   Entrar
                 </Link>
               </div>
@@ -75,7 +75,7 @@ const Maestro = () => {
               <img src="https://images.nightcafe.studio/jobs/nsmNoMOT8szTGoGi0tQP/nsmNoMOT8szTGoGi0tQP--1--jvclb.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Proveedores" />
               <div className="card-body">
                 <h5 className="card-title">Proveedores</h5>
-                <Link to="/menu/tipo_usuarios" className="btn btn-primary">
+                <Link to="/menu/proveedores" className="btn btn-primary">
                   Entrar
                 </Link>
               </div>
@@ -86,9 +86,10 @@ const Maestro = () => {
               <img src="https://images.nightcafe.studio/jobs/2pB7lpA8ShNYHWB4f46I/2pB7lpA8ShNYHWB4f46I--1--y1qto.jpg?tr=w-1600,c-at_max" className="card-img-top" alt="Bancos" />
               <div className="card-body">
                 <h5 className="card-title">Bancos</h5>
-                <Link to="/menu/reservas" className="btn btn-primary">
+                <Link to="/menu/bancos" className="btn btn-primary">
                   Entrar
                 </Link>
+                
               </div>
             </div>
           </div>

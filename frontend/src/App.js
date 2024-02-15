@@ -18,6 +18,11 @@ import Consultas2 from './components/Consultas2';
 import Consultas3 from './components/Consultas3';
 import Login from './components/Login';
 import Stock from './components/almacen/stock';
+import ListaBancos from './components/ListaBancos';
+import ListaClientes from './components/ListarClientes';
+import ListarProveedores from './components/ListarProveedores';
+import FormProveedor from './components/FormProveedor';
+import FormCliente from './components/formCliente';
 
 function App() {
   return (
@@ -44,6 +49,17 @@ function App() {
         <Route path="/menu/maestro/organizacion/nueva_unidad" element={<NuevaUnidad />} />
         <Route path="/menu/maestro/organizacion/nueva_area" element={<NuevaArea />} />
         <Route path="/menu/maestro/organizacion/nueva_sub_area" element={<NuevaSubArea />} />
+
+        <Route path="/menu/bancos" element={<ListaBancos/>} />
+
+        <Route path="/menu/clientes" element={<ListaClientes/>} />
+        <Route path="/menu/cliente/agregar" element={<FormCliente/>} />
+
+        <Route path="/menu/proveedores" element={<ListarProveedores/>} />
+        <Route path="/menu/proveedor/agregar" element={<FormProveedor/>} />
+
+
+
         {/* rutas de almacen */}
         <Route path="/menu/almacen/stock" element={<Stock />} />
           <Route path="/login" element={<Login />} />
