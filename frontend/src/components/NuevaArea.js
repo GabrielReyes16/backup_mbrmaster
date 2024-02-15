@@ -52,7 +52,7 @@ const NuevaArea = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link to="/menu/maestro" className="nav-link">
+              <Link to="/menu/maestro" className="nav-link">z
                 Maestro
               </Link>
               <Link to="/menu/maestro/organizacion" className="nav-link">

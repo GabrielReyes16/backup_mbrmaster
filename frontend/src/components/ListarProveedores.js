@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import api from '../api';
 
 const ListarProveedores = () => {
@@ -39,8 +40,58 @@ const ListarProveedores = () => {
   );
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-4">Lista de Proveedores</h2>
+    <div>
+      {/* Navbar */}
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
+        <div className="container-fluid">
+          <Link to="/menu" className="navbar-brand">
+            Dashboard
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <Link to="/menu/maestro" className="nav-link">
+                Maestro
+              </Link>
+              <Link to="/menu/maestro/organizacion" className="nav-link">
+                Proveedores
+              </Link>
+              {/* Use a button instead of an anchor for a disabled link */}
+              <button className="nav-link disabled" aria-disabled="true">
+                Nueva Area
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <hr />
+      {/* Contenedor del formulario */}
+
+      <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Lista de Proveedores</h2>
+        <Link to="/menu/proveedor/agregar" className="btn btn-primary">
+          Agregar Proveedor
+        </Link>
+      </div>
       <div className="mb-3">
         <input
           type="text"
@@ -54,10 +105,10 @@ const ListarProveedores = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>RUC/DNI</th>
-            <th>Nombre/Razón Social</th>
+            <th>RUC</th>
+            <th>Razón Social</th>
             <th>Fecha de Inicio</th>
-            <th>Rubro/Actividad Económica</th>
+            <th>Rubro</th>
             <th>Comentarios</th>
             <th>Contactos</th>
             <th>Direcciones</th> {/* Nueva columna para mostrar las direcciones */}
@@ -103,6 +154,9 @@ const ListarProveedores = () => {
           ))}
         </tbody>
       </table>
+    </div>
+
+
     </div>
   );
 };

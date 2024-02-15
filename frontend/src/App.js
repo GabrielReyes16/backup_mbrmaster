@@ -50,6 +50,8 @@ function App() {
         <Route path="/menu/maestro/organizacion/nueva_area" element={<NuevaArea />} />
         <Route path="/menu/maestro/organizacion/nueva_sub_area" element={<NuevaSubArea />} />
 
+        
+
         <Route path="/menu/bancos" element={<ListaBancos/>} />
 
         <Route path="/menu/clientes" element={<ListaClientes/>} />

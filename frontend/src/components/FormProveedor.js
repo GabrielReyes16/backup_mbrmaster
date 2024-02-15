@@ -1,4 +1,5 @@
 import React, { useState, useEffect  } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import api from '../api';
 
 const FormProveedor = () => {
@@ -220,6 +221,7 @@ const FormProveedor = () => {
 
   return (
     <div className="container-fluid">
+      
       {/* Navbar */}
       {/* Contenido */}
       <div className="row justify-content-center mt-4">

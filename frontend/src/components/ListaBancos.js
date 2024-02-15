@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import api from '../api';
 
 const ListaBancos = () => {
@@ -24,6 +25,7 @@ const ListaBancos = () => {
 
   return (
     <div className="container mt-4">
+      
       <h2 className="mb-4">Lista de Bancos</h2>
       <table className="table">
         <thead>

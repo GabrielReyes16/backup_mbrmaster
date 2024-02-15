@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import api from '../api';
 
 const ListaClientes = () => {
@@ -27,11 +28,6 @@ const ListaClientes = () => {
     fetchData();
   }, []);
 
-  const handleEnlaceClic = (id) => {
-    console.log(`Se hizo clic en el enlace del cliente con ID: ${id}`);
-    // Agrega aquí cualquier lógica adicional que desees realizar al hacer clic en el enlace
-  };
-
   const handleBusquedaChange = (event) => {
     setBusqueda(event.target.value);
   };
@@ -41,8 +37,58 @@ const ListaClientes = () => {
   );
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-4">Lista de Clientes</h2>
+    
+    <div>
+      {/* Navbar */}
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
+        <div className="container-fluid">
+          <Link to="/menu" className="navbar-brand">
+            Dashboard
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <Link to="/menu/maestro" className="nav-link">
+                Maestro
+              </Link>
+              <Link to="/menu/maestro/organizacion" className="nav-link">
+                Organizacion
+              </Link>
+              {/* Use a button instead of an anchor for a disabled link */}
+              <button className="nav-link disabled" aria-disabled="true">
+                Nueva Area
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <hr />
+      {/* Contenedor del formulario */}
+      <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Lista de Clientes</h2>
+        <Link to="/menu/cliente/agregar" className="btn btn-primary">
+          Agregar Cliente
+        </Link>
+      </div>
       <div className="mb-3">
         <input
           type="text"
@@ -52,8 +98,8 @@ const ListaClientes = () => {
           className="form-control"
         />
       </div>
-      <table className="table">
-        <thead>
+      <table className="table table-striped">
+        <thead className="thead-dark">
           <tr>
             <th>ID</th>
             <th>RUC/DNI</th>
@@ -68,7 +114,7 @@ const ListaClientes = () => {
         <tbody>
           {filteredClientes.map((cliente) => (
             <tr key={cliente.id}>
-              <td><a href={`/menu/cliente/editar/${cliente.id}`}>{cliente.id}</a></td>
+              <td><Link to={`/menu/cliente/editar/${cliente.id}`}>{cliente.id}</Link></td>
               <td>{cliente.ruc_dni}</td>
               <td>{cliente.nombre_razon_social}</td>
               <td>{cliente.fecha_inicio}</td>
@@ -105,6 +151,8 @@ const ListaClientes = () => {
           ))}
         </tbody>
       </table>
+    </div>
+      
     </div>
   );
 };
