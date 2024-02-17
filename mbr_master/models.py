@@ -198,6 +198,42 @@ class PersonaTipoPago(models.Model):
     def __str__(self):
         return f'{self.personaId} - {self.tipoPagoId}'
 
+# Modelo de Gastos
+    
+class TipoGasto(models.Model):
+    nombre = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nombre
+
+class TipoComprobante(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+class Gasto(models.Model):
+    tipo_gasto = models.ForeignKey(TipoGasto, on_delete=models.CASCADE)
+    tipo_comprobante = models.ForeignKey(TipoComprobante, on_delete=models.CASCADE)
+    numero_serie = models.CharField(max_length=50)
+    concepto = models.CharField(max_length=255)
+    fecha_comprobante = models.DateField()
+    numero_comprobante = models.CharField(max_length=50)
+    ruc_dni = models.CharField(max_length=20)
+    nombre_razon_social = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255)
+    distrito = models.CharField(max_length=100)
+    provincia = models.CharField(max_length=100)
+    departamento = models.CharField(max_length=100)
+    pais = models.CharField(max_length=100)
+    tipo_compra = models.CharField(max_length=100)
+    orden_compra = models.CharField(max_length=100)
+    fecha_vencimiento = models.DateField()
+    moneda = models.CharField(max_length=10)
+    comentarios = models.TextField(blank=True, null=True)
+    total_comprobante = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.tipo_gasto} - {self.concepto}"
     
 

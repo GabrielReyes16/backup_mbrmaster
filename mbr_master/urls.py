@@ -44,6 +44,13 @@ urlpatterns = [
     path('unidades/<int:pk>/', unidad_detail, name='unidad_detail'),
     path('consultar/', views.consultar, name='consultar'),
 
+    #Rutas para Gastos
+    path('gastos/', views.gasto_list, name='gasto_list'),
+    path('gastos/<int:pk>/', views.gasto_detail, name='gasto_detail'),
+    path('tipo-gasto/', views.tipo_gasto_list),
+    path('tipo-gasto/<int:pk>/', views.tipo_gasto_detail),
+    path('tipo-comprobante/', views.tipo_comprobante_list),
+    path('tipo-comprobante/<int:pk>/', views.tipo_comprobante_detail),
     #Rutas para el Banco
 
     path("api/v1/", include(router.urls)),

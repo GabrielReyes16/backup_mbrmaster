@@ -38,9 +38,11 @@ const ConsultasUnidades = () => {
 
   const filtrarUnidades = (textoFiltro) => {
     const unidadesFiltradas = unidades.filter(unidad =>
-      unidad.nombre.toLowerCase().includes(textoFiltro.toLowerCase()) ||
-      unidad.area.toLowerCase().includes(textoFiltro.toLowerCase()) ||
-      unidad.subarea.toLowerCase().includes(textoFiltro.toLowerCase())
+      (
+        (typeof unidad.area === 'string' && unidad.area.toLowerCase().includes(textoFiltro.toLowerCase())) ||
+        (typeof unidad.subarea === 'string' && unidad.subarea.toLowerCase().includes(textoFiltro.toLowerCase())) ||
+        unidad.nombre.toLowerCase().includes(textoFiltro.toLowerCase())
+      )
     );
     setResultados(unidadesFiltradas);
   };
@@ -125,7 +127,7 @@ const ConsultasUnidades = () => {
       <hr />
       <div className="container">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h2>Unidades</h2>
+          <h2>Consulta General</h2>
           <Link to="/menu/maestro/organizacion" className="btn btn-secondary">
             Regresar
           </Link>

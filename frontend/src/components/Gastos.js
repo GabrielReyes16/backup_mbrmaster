@@ -65,7 +65,7 @@ const Gastos = () => {
               <div className="card-body">
                 <h5 className="card-title">Nuevo Ingreso</h5>
                 <Link to="/menu/usuarios" className="btn btn-primary">
-                  Vamos a Usuarios
+                  Entrar
                 </Link>
               </div>
             </div>
@@ -76,7 +76,7 @@ const Gastos = () => {
               <div className="card-body">
                 <h5 className="card-title">Consultas</h5>
                 <Link to="/menu/tipo_usuarios" className="btn btn-primary">
-                  Vamos a Tipos de Usuario
+                  Entrar
                 </Link>
               </div>
             </div>

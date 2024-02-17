@@ -6,8 +6,8 @@ from rest_framework import permissions, status, viewsets, generics
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .models import Unidad, Area, SubArea, Banco
-from .serializer import UnidadSerializer, AreaSerializer, SubAreaSerializer, BancoSerializer
+from .models import Unidad, Area, SubArea, Banco, TipoGasto, TipoComprobante, Gasto
+from .serializer import UnidadSerializer, AreaSerializer, SubAreaSerializer, BancoSerializer, TipoGastoSerializer, TipoComprobanteSerializer, GastoSerializer
 
 
 #Authentication
@@ -261,3 +261,110 @@ def consultar(request):
         }
         
         return Response(data)
+
+# Views para Gastos
+
+@api_view(['POST', 'GET'])
+def gasto_list(request):
+    if request.method == 'POST':
+        serializer = GastoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        gastos = Gasto.objects.all()
+        serializer = GastoSerializer(gastos, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def gasto_detail(request, pk):
+    try:
+        gasto = Gasto.objects.get(pk=pk)
+    except Gasto.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = GastoSerializer(gasto)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = GastoSerializer(gasto, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        gasto.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['POST', 'GET'])
+def tipo_gasto_list(request):
+    if request.method == 'POST':
+        serializer = TipoGastoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    elif request.method == 'GET':
+        tipos_gasto = TipoGasto.objects.all()
+        serializer = TipoGastoSerializer(tipos_gasto, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def tipo_gasto_detail(request, pk):
+    try:
+        tipo_gasto = TipoGasto.objects.get(pk=pk)
+    except TipoGasto.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = TipoGastoSerializer(tipo_gasto)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = TipoGastoSerializer(tipo_gasto, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        tipo_gasto.delete()
+        return Response(status=204)
+
+@api_view(['POST', 'GET'])
+def tipo_comprobante_list(request):
+    if request.method == 'POST':
+        serializer = TipoComprobanteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    elif request.method == 'GET':
+        tipos_comprobante = TipoComprobante.objects.all()
+        serializer = TipoComprobanteSerializer(tipos_comprobante, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def tipo_comprobante_detail(request, pk):
+    try:
+        tipo_comprobante = TipoComprobante.objects.get(pk=pk)
+    except TipoComprobante.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = TipoComprobanteSerializer(tipo_comprobante)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = TipoComprobanteSerializer(tipo_comprobante, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        tipo_comprobante.delete()
+        return Response(status=204)

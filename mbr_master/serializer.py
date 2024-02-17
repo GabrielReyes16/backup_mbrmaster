@@ -2,7 +2,7 @@ from rest_framework import serializers
 #Auth models
 from .models import User, Profile
 #Other models
-from .models import Unidad, Area, SubArea, Banco, Tipo, Persona, Direccion, Contacto, CuentaBancaria, ImpuestoAsociado, PersonaImpuesto, TipoPago, PersonaTipoPago
+from .models import Unidad, Area, SubArea, Banco, Tipo, Persona, Direccion, Contacto, CuentaBancaria, ImpuestoAsociado, PersonaImpuesto, TipoPago, PersonaTipoPago, TipoGasto, TipoComprobante, Gasto
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
@@ -129,4 +129,24 @@ class TipoPagoSerializer(serializers.ModelSerializer):
 class PersonaTipoPagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonaTipoPago
+        fields = '__all__'
+
+# Gastos
+        
+class TipoGastoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoGasto
+        fields = ['id', 'nombre']
+
+class TipoComprobanteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoComprobante
+        fields = ['id', 'nombre']
+
+class GastoSerializer(serializers.ModelSerializer):
+    tipo_gasto = TipoGastoSerializer()
+    tipo_comprobante = TipoComprobanteSerializer()
+
+    class Meta:
+        model = Gasto
         fields = '__all__'
