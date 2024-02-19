@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthContext, { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Modal from 'react-modal'; 
 import Menu from './components/Menu';
 import Maestro from './components/Maestro';
 import Gastos from './components/Gastos';
@@ -23,7 +24,8 @@ import ListaClientes from './components/ListarClientes';
 import ListarProveedores from './components/ListarProveedores';
 import FormProveedor from './components/FormProveedor';
 import FormCliente from './components/formCliente';
-
+import FormBanco from './components/FormBanco';
+Modal.setAppElement('#root');
 function App() {
   return (
     <Router>
@@ -53,6 +55,8 @@ function App() {
         
 
         <Route path="/menu/bancos" element={<ListaBancos/>} />
+        <Route path="/menu/banco/agregar" element={<FormBanco/>} />
+
 
         <Route path="/menu/clientes" element={<ListaClientes/>} />
         <Route path="/menu/cliente/agregar" element={<FormCliente/>} />

@@ -415,6 +415,85 @@ async addPersonaTipoPago(datosPersonaTipoPago) {
     throw error;
   }
 },
+
+async addBanco(datosBanco) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/bancos/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosBanco),
+      credentials: 'include',
+    });
+    const bancoAgregado = await response.json();
+    return bancoAgregado;
+  } catch (error) {
+    console.error('Error al añadir el banco:', error);
+    throw error;
+  }
+},
+
+async obtenerBancoPorId(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/bancos/${id}/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    if (!response.ok) {
+      throw new Error('Error al obtener el banco');
+    }
+    const banco = await response.json();
+    return banco;
+  } catch (error) {
+    console.error('Error al obtener el banco por ID:', error);
+    throw error;
+  }
+},
+
+async editarBanco(id, datosBanco) {
+  try {
+    console.log('Datos de la unidad a editar:', datosBanco); 
+    const response = await fetch(`${API_BASE_URL}/v1/bancos/${id}/`, { 
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosBanco), 
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar banco:', error);
+    throw error;
+  }
+},
+
+async eliminarBanco(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/bancos/${id}/`, { 
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    if (response.status === 204) {
+      return { success: true };
+    } else {
+      throw new Error('No se pudo eliminar el Banco');
+    }
+  } catch (error) {
+    console.error('Error al eliminar Banco:', error);
+    throw error;
+  }
+},
+
+
 /* Contenido trabajado por Yeffer */
 
 

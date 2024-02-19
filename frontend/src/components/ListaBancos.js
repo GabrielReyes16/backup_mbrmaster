@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import Modal from 'react-modal';
 import api from '../api';
+import EditarBancoModal from './EditarBancoModal';
 
 const ListaBancos = () => {
   const [bancos, setBancos] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [bancoIdToDelete, setBancoIdToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,15 +23,40 @@ const ListaBancos = () => {
     fetchData();
   }, []);
 
-  const handleEnlaceClic = (id) => {
-    console.log(`Se hizo clic en el enlace del banco con ID: ${id}`);
-    // Agrega aquí cualquier lógica adicional que desees realizar al hacer clic en el enlace
+  const handleBusquedaChange = (event) => {
+    setBusqueda(event.target.value);
+  };
+
+  const handleEliminar = async (id) => {
+    try {
+      await api.eliminarBanco(id);
+      // Actualizar la lista de bancos después de eliminar uno
+      const updatedBancos = bancos.filter(banco => banco.id !== id);
+      setBancos(updatedBancos);
+    } catch (error) {
+      console.error('Error al eliminar el banco:', error);
+    }
   };
 
   return (
     <div className="container mt-4">
-      
-      <h2 className="mb-4">Lista de Bancos</h2>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Lista de Bancos</h2>
+        <Link to="/menu/banco/agregar" className="btn btn-primary">
+          Agregar Banco
+        </Link>
+      </div>
+
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Buscar por ID/NOMBRE"
+          value={busqueda}
+          onChange={handleBusquedaChange}
+          className="form-control"
+        />
+      </div>
+
       <table className="table">
         <thead>
           <tr>
@@ -35,19 +65,18 @@ const ListaBancos = () => {
             <th>Moneda</th>
             <th>Tipo de Cuenta</th>
             <th>Fecha de apertura</th>
-            <th>numero de cuenta</th>
+            <th>Número de cuenta</th>
             <th>CCI</th>
-            <th>funcionario</th>
+            <th>Funcionario</th>
             <th>Agencia de apertura</th>
             <th>Estado</th>
-            
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {bancos.map((banco) => (
-            
-            <tr  key={banco.id}>
-              <td><a href={`/menu/banco/editar/${banco.id}`}>{banco.id}</a></td>
+            <tr key={banco.id}>
+              <td>{banco.id}</td>
               <td>{banco.nombre}</td>
               <td>{banco.moneda}</td>
               <td>{banco.tipo_cuenta}</td>
@@ -56,11 +85,19 @@ const ListaBancos = () => {
               <td>{banco.cci}</td>
               <td>{banco.funcionario}</td>
               <td>{banco.agencia_apertura}</td>
-              <td>{banco.estado}</td>              
+              <td>{banco.estado}</td>
+              <td>
+                <button onClick={() => setModalIsOpen(true)} className="btn btn-sm btn-primary mr-2">Editar</button>
+                <button onClick={() => setBancoIdToDelete(banco.id)} className="btn btn-sm btn-danger mr-2">Eliminar</button>
+                <Link to={`/menu/banco/${banco.id}`} className="btn btn-sm btn-info">Ver más</Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <EditarBancoModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
+      <ConfirmarEliminarModal isOpen={!!bancoIdToDelete} onRequestClose={() => setBancoIdToDelete(null)} onConfirm={() => { handleEliminar(bancoIdToDelete); setBancoIdToDelete(null); }} />
     </div>
   );
 };
