@@ -416,6 +416,41 @@ async addPersonaTipoPago(datosPersonaTipoPago) {
   }
 },
 
+async listarImpuestosAsociados() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/impuestosAsociados/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const impuestosAsociados = await response.json();
+    return impuestosAsociados;
+  } catch (error) {
+    console.error('Error al listar tipos de impuestos asociados:', error);
+    throw error;
+  }
+},
+
+async addPersonaImpuestoAsociado(datosPersonaImpuestoAsociado) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaImpuestosAsociados/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datosPersonaImpuestoAsociado),
+      credentials: 'include',
+    });
+    const personaImpuestoAsociadoAgregada = await response.json();
+    return personaImpuestoAsociadoAgregada;
+  } catch (error) {
+    console.error('Error al añadir el tipo de pago:', error);
+    throw error;
+  }
+},
+
 async addBanco(datosBanco) {
   try {
     const response = await fetch(`${API_BASE_URL}/v1/bancos/`, {

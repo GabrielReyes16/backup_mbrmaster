@@ -1,5 +1,4 @@
 import React, { useState, useEffect  } from 'react';
-import { Link, Outlet } from 'react-router-dom';
 import api from '../api';
 
 const FormProveedor = () => {
@@ -42,7 +41,11 @@ const FormProveedor = () => {
   ]);
 
   const [tiposPago, setTiposPago] = useState([]);
-  const [tipoPagoSeleccionado, setTipoPagoSeleccionado] = useState(''); // Define tipoPagoSeleccionado y setTipoPagoSeleccionado
+  const [tipoPagoSeleccionado, setTipoPagoSeleccionado] = useState('');
+
+
+  const [impuestosDisponibles, setImpuestosDisponibles] = useState([]);
+  const [impuestoSeleccionado, setImpuestoSeleccionado] = useState(''); // Nuevo estado para impuesto seleccionado
 
   useEffect(() => {
     const listarTiposPago = async () => {
@@ -56,6 +59,21 @@ const FormProveedor = () => {
 
     listarTiposPago();
   }, []);
+
+
+  useEffect(() => {
+    const fetchImpuestos = async () => {
+      try {
+        const impuestosResponse = await api.listarImpuestosAsociados();
+        setImpuestosDisponibles(impuestosResponse);
+      } catch (error) {
+        console.error('Error al obtener los impuestos:', error);
+      }
+    };
+
+    fetchImpuestos();
+  }, []);
+
 
   const handleGuardar = async () => {
     try {
@@ -88,6 +106,11 @@ const FormProveedor = () => {
       await api.addPersonaTipoPago({
         personaId: proveedorResponse.id,
         tipoPagoId: tipoPagoSeleccionado,
+      });
+
+      await api.addPersonaImpuestoAsociado({
+        personaId: proveedorResponse.id,
+        impuestoId: impuestoSeleccionado,
       });
 
       console.log("Proveedor guardado:", proveedorResponse);
@@ -130,6 +153,8 @@ const FormProveedor = () => {
           moneda: '',
         }
       ]);
+      setImpuestoSeleccionado('');
+      setTipoPagoSeleccionado('');
     } catch (error) {
       console.error('Error al guardar nuevo proveedor:', error);
     }
@@ -137,6 +162,10 @@ const FormProveedor = () => {
 
   const handleChangeTipoPago = (e) => {
     setTipoPagoSeleccionado(e.target.value);
+  };
+
+  const handleChangeImpuesto = (e) => {
+    setImpuestoSeleccionado(e.target.value);
   };
 
 
@@ -221,7 +250,6 @@ const FormProveedor = () => {
 
   return (
     <div className="container-fluid">
-      
       {/* Navbar */}
       {/* Contenido */}
       <div className="row justify-content-center mt-4">
@@ -501,6 +529,20 @@ const FormProveedor = () => {
                   <option value="">Seleccionar tipo de pago</option>
                   {tiposPago.map(tipo => (
                     <option key={tipo.id} value={tipo.id}>{tipo.tipo}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Impuesto:</label>
+                <select
+                  className="form-select"
+                  value={impuestoSeleccionado}
+                  onChange={(e) => setImpuestoSeleccionado(e.target.value)}
+                >
+                  <option value="">Seleccionar impuesto</option>
+                  {impuestosDisponibles.map(impuesto => (
+                    <option key={impuesto.id} value={impuesto.id}>{impuesto.impuesto}</option>
                   ))}
                 </select>
               </div>

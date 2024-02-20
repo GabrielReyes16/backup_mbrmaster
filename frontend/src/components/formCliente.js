@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../api';
 
 const FormCliente = () => {
@@ -30,23 +30,6 @@ const FormCliente = () => {
     }
   ]);
 
-  const [tiposPago, setTiposPago] = useState([]);
-  const [tipoPagoSeleccionado, setTipoPagoSeleccionado] = useState(''); // Define tipoPagoSeleccionado y setTipoPagoSeleccionado
-
-
-  useEffect(() => {
-    const listarTiposPago = async () => {
-      try {
-        const response = await api.listarTiposPago();
-        setTiposPago(response);
-      } catch (error) {
-        console.error('Error al obtener los tipos de pago:', error);
-      }
-    };
-
-    listarTiposPago();
-  }, []);
-
 
   const handleGuardar = async () => {
     try {
@@ -68,10 +51,6 @@ const FormCliente = () => {
         console.log("Contacto guardado:", contactoResponse);
       }));
 
-      await api.addPersonaTipoPago({
-        personaId: clienteResponse.id,
-        tipoPagoId: tipoPagoSeleccionado,
-      });
 
       console.log("Cliente guardado:", clienteResponse);
 
@@ -103,14 +82,13 @@ const FormCliente = () => {
           correo: '',
         }
       ]);
+
     } catch (error) {
       console.error('Error al guardar nuevo cliente:', error);
     }
   };
 
-  const handleChangeTipoPago = (e) => {
-    setTipoPagoSeleccionado(e.target.value);
-  };
+
 
   const handleChangeCliente = (e) => {
     const { name, value } = e.target;
@@ -368,7 +346,8 @@ const FormCliente = () => {
                 Agregar contacto
               </button>
 
-        
+
+
               {/* Botón de guardar */}
               <button className="btn btn-primary mt-3" onClick={handleGuardar}>
                 Guardar

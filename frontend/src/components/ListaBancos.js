@@ -9,6 +9,7 @@ const ListaBancos = () => {
   const [busqueda, setBusqueda] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bancoIdToDelete, setBancoIdToDelete] = useState(null);
+  const [bancoIdToEdit, setBancoIdToEdit] = useState(null); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +28,21 @@ const ListaBancos = () => {
     setBusqueda(event.target.value);
   };
 
+  const handleEditar = (id) => {
+    setBancoIdToEdit(id); 
+    setModalIsOpen(true); 
+  };
+
   const handleEliminar = async (id) => {
-    try {
-      await api.eliminarBanco(id);
-      // Actualizar la lista de bancos después de eliminar uno
-      const updatedBancos = bancos.filter(banco => banco.id !== id);
-      setBancos(updatedBancos);
-    } catch (error) {
-      console.error('Error al eliminar el banco:', error);
+    const confirmacion = window.confirm('¿Estás seguro que deseas eliminar este banco?');
+    if (confirmacion) {
+      try {
+        await api.eliminarBanco(id);
+        const updatedBancos = bancos.filter(banco => banco.id !== id);
+        setBancos(updatedBancos);
+      } catch (error) {
+        console.error('Error al eliminar el banco:', error);
+      }
     }
   };
 
@@ -87,8 +95,8 @@ const ListaBancos = () => {
               <td>{banco.agencia_apertura}</td>
               <td>{banco.estado}</td>
               <td>
-                <button onClick={() => setModalIsOpen(true)} className="btn btn-sm btn-primary mr-2">Editar</button>
-                <button onClick={() => setBancoIdToDelete(banco.id)} className="btn btn-sm btn-danger mr-2">Eliminar</button>
+                <button onClick={() => handleEditar(banco.id)} className="btn btn-sm btn-primary mr-2">Editar</button>
+                <button onClick={() => handleEliminar(banco.id)} className="btn btn-sm btn-danger mr-2">Eliminar</button>
                 <Link to={`/menu/banco/${banco.id}`} className="btn btn-sm btn-info">Ver más</Link>
               </td>
             </tr>
@@ -96,8 +104,8 @@ const ListaBancos = () => {
         </tbody>
       </table>
 
-      <EditarBancoModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} />
-      <ConfirmarEliminarModal isOpen={!!bancoIdToDelete} onRequestClose={() => setBancoIdToDelete(null)} onConfirm={() => { handleEliminar(bancoIdToDelete); setBancoIdToDelete(null); }} />
+      <EditarBancoModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} bancoId={bancoIdToEdit} />
+      
     </div>
   );
 };
