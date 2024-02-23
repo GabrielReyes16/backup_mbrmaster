@@ -529,6 +529,120 @@ async eliminarBanco(id) {
 },
 
 
+async obtenerPersonaPorId(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personas/${id}/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    if (!response.ok) {
+      throw new Error('Error al obtener persona');
+    }
+    const persona = await response.json();
+    return persona;
+  } catch (error) {
+    console.error('Error al obtener persona por ID:', error);
+    throw error;
+  }
+
+},
+
+async editarPersona(id, datosPersona) {
+  try {
+    console.log('Datos de la unidad a editar:', datosPersona); 
+    const response = await fetch(`${API_BASE_URL}/v1/personas/${id}/`, { 
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosPersona), 
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar persona:', error);
+    throw error;
+  }
+},
+
+async eliminarPersona(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personas/${id}/`, { 
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    if (response.status === 204) {
+      return { success: true };
+    } else {
+      throw new Error('No se pudo eliminar el persona');
+    }
+  } catch (error) {
+    console.error('Error al eliminar persona:', error);
+    throw error;
+  }
+},
+
+async editarContacto(id, datosContacto) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/contactos/${id}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosContacto),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al editar el contacto');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar contacto:', error);
+    throw error;
+  }
+},
+
+async editarDireccion(id, datosDireccion) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/direcciones/${id}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosDireccion),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al editar el direccion');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar direccion:', error);
+    throw error;
+  }
+},
+
+
+
+
+
+
+
+
+
 /* Contenido trabajado por Yeffer */
 
 

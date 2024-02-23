@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import api from '../api';
+import EditarProveedorModal from './EditarProveedorModal'; // Importa el componente de modal de edición de cliente
+import VerClienteModal from './VerProveedorModal';
 
 const ListarProveedores = () => {
   const [clientes, setClientes] = useState([]);
   const [contactos, setContactos] = useState([]);
   const [direcciones, setDirecciones] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false); // Estado para controlar la apertura y cierre del modal
+  const [clienteIdToEdit, setClienteIdToEdit] = useState(null); // Estado para almacenar el ID del cliente a editar
+
+  const [clienteSeleccionado, setClienteSeleccionado] = useState(null); // Nuevo estado para almacenar el cliente seleccionado
+  const [modalVerMasIsOpen, setModalVerMasIsOpen] = useState(false); // Estado para controlar la apertura y cierre del modal de "Ver más"
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +47,28 @@ const ListarProveedores = () => {
     cliente.ruc_dni.includes(busqueda) || cliente.nombre_razon_social.toLowerCase().includes(busqueda.toLowerCase())
   );
 
+  const handleEditar = (id) => {
+    setClienteIdToEdit(id); // Establece el ID del cliente a editar
+    setModalIsOpen(true); // Abre el modal de edición
+  };
+
+  const handleEliminar = async (id) => {
+    const confirmacion = window.confirm('¿Estás seguro que deseas eliminar este cliente?');
+    if (confirmacion) {
+      try {
+        await api.eliminarPersona(id);
+        const updatedClientes = clientes.filter(cliente => cliente.id !== id);
+        setClientes(updatedClientes);
+      } catch (error) {
+        console.error('Error al eliminar el cliente:', error);
+      }
+    }
+  };
+
+  const handleVerMas = (cliente) => {
+    setClienteSeleccionado(cliente); // Establece el cliente seleccionado
+    setModalVerMasIsOpen(true); // Abre el modal de "Ver más"
+  };
   return (
     <div>
       {/* Navbar */}
@@ -111,7 +141,6 @@ const ListarProveedores = () => {
             <th>Rubro</th>
             <th>Comentarios</th>
             <th>Contactos</th>
-            <th>Direcciones</th> {/* Nueva columna para mostrar las direcciones */}
           </tr>
         </thead>
         <tbody>
@@ -124,37 +153,19 @@ const ListarProveedores = () => {
               <td>{cliente.rubro_actividad_economica}</td>
               <td>{cliente.comentarios}</td>
               <td>
-                {/* Mostrar los contactos del proveedor */}
-                {contactos
-                  .filter(contacto => contacto.personaId === cliente.id)
-                  .map(contacto => (
-                    <div key={contacto.id}>
-                      <p>Nombre: {contacto.nombre}</p>
-                      <p>Cargo: {contacto.cargo}</p>
-                      <p>Teléfono: {contacto.telefono}</p>
-                      <p>Correo: {contacto.correo}</p>
-                    </div>
-                  ))}
-              </td>
-              <td>
-                {/* Mostrar las direcciones del proveedor */}
-                {direcciones
-                  .filter(direccion => direccion.personaId === cliente.id)
-                  .map(direccion => (
-                    <div key={direccion.id}>
-                      <p>Dirección: {direccion.direccion}</p>
-                      <p>Distrito: {direccion.distrito}</p>
-                      <p>Provincia: {direccion.provincia}</p>
-                      <p>Departamento: {direccion.departamento}</p>
-                      <p>País: {direccion.pais}</p>
-                    </div>
-                  ))}
-              </td>
+                  {/* Botones de editar y eliminar */}
+                  <button onClick={() => handleEditar(cliente.id)} className="btn btn-sm btn-primary mr-2">Editar</button>
+                  <button onClick={() => handleEliminar(cliente.id)} className="btn btn-sm btn-danger mr-2">Eliminar</button>
+                  <button onClick={() => handleVerMas(cliente)} className="btn btn-sm btn-info">Ver más</button>
+                </td>
             </tr>
           ))}
         </tbody>
+        <VerClienteModal isOpen={modalVerMasIsOpen} onRequestClose={() => setModalVerMasIsOpen(false)} cliente={clienteSeleccionado} />
       </table>
     </div>
+    {/* Modal de edición de cliente */}
+    <EditarProveedorModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} clienteId={clienteIdToEdit} />
 
 
     </div>
