@@ -635,6 +635,40 @@ async editarDireccion(id, datosDireccion) {
   }
 },
 
+async listarPersonaTiposPago() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaTiposPago/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const PersonatiposPago = await response.json();
+    return PersonatiposPago;
+  } catch (error) {
+    console.error('Error al listar persoona tipos de pago:', error);
+    throw error;
+  }
+},
+
+async listarPersonaImpuestosAsociados() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaImpuestosAsociados`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const PersonaImpuestosAsociados = await response.json();
+    return PersonaImpuestosAsociados;
+  } catch (error) {
+    console.error('Error al listar persoona tipos de pago:', error);
+    throw error;
+  }
+},
+
 
 
 

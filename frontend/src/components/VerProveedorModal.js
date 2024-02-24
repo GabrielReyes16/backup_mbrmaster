@@ -5,6 +5,10 @@ import api from '../api';
 const VerClienteModal = ({ isOpen, onRequestClose, cliente }) => {
   const [contactos, setContactos] = useState([]);
   const [direcciones, setDirecciones] = useState([]);
+  const [tiposPago, setTiposPago] = useState([]);
+  const [personaTiposPago, setPersonaTiposPago] = useState([]);
+  const [impuestos, setImpuestos] = useState([]);
+  const [personaImpuestosAsociados, setPersonaImpuestosAsociados] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +25,50 @@ const VerClienteModal = ({ isOpen, onRequestClose, cliente }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchTiposPago = async () => {
+      try {
+        const responseTiposPago = await api.listarTiposPago();
+        const responsePersonaTiposPago = await api.listarPersonaTiposPago();
+        setTiposPago(responseTiposPago);
+        setPersonaTiposPago(responsePersonaTiposPago);
+      } catch (error) {
+        console.error('Error al obtener tipos de pago:', error);
+      }
+    };
+  
+    fetchTiposPago();
+  }, []);
+
+  useEffect(() => {
+    const fetchImpuestos = async () => {
+      try {
+        const responseImpuestos = await api.listarImpuestosAsociados();
+        const responsePersonaImpuestosAsociados = await api.listarPersonaImpuestosAsociados();
+        setImpuestos(responseImpuestos);
+        setPersonaImpuestosAsociados(responsePersonaImpuestosAsociados);
+      } catch (error) {
+        console.error('Error al obtener impuestos:', error);
+      }
+    };
+  
+    fetchImpuestos();
+  }, []);
+
+  const getTipoPago = (clienteId) => {
+    const tipoPagoId = personaTiposPago.find(item => item.personaId === clienteId)?.tipoPagoId;
+    const tipoPago = tiposPago.find(tipo => tipo.id === tipoPagoId);
+    return tipoPago ? tipoPago.tipo : 'No especificado';
+  };
+
+  const getImpuestosAsociados = (clienteId) => {
+    const impuestosAsociadosIds = personaImpuestosAsociados
+      .filter(item => item.personaId === clienteId)
+      .map(item => item.impuestoId);
+    const impuestosAsociados = impuestos.filter(impuesto => impuestosAsociadosIds.includes(impuesto.id));
+    return impuestosAsociados.map(impuesto => impuesto.impuesto).join(', ');
+  };
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -120,6 +168,15 @@ const VerClienteModal = ({ isOpen, onRequestClose, cliente }) => {
                     ))}
                 </tbody>
               </table>
+            </div>
+            <div className="form-group">
+              <label>Tipo de Pago:</label>
+              <input type="text" className="form-control" value={getTipoPago(cliente.id)} readOnly />
+            </div>
+
+            <div className="form-group">
+              <label>Impuestos Asociados:</label>
+              <input type="text" className="form-control" value={getImpuestosAsociados(cliente.id)} readOnly />
             </div>
   
           </div>
