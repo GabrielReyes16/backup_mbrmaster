@@ -85,7 +85,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'simeh2005',
         'PORT': '3306',
-        'NAME': 'mbr_masterr',
+        'NAME': 'mbr_master',
     }
 }
 

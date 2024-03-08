@@ -83,8 +83,11 @@ const FormCliente = () => {
         }
       ]);
 
+      alert("El Cliente se ha agregado correctamente");
     } catch (error) {
-      console.error('Error al guardar nuevo cliente:', error);
+      console.error('Error al guardar nuevo Cliente:', error);
+      
+      alert("Error al guardar nuevo Cliente. Por favor, revise los campos e inténtelo de nuevo");
     }
   };
 

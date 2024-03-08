@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api';
+import { Link } from 'react-router-dom'
 
 const FormBanco = () => {
   const [datosBanco, setDatosBanco] = useState({
@@ -36,13 +37,59 @@ const FormBanco = () => {
         agencia_apertura: '',
         estado: '',
       });
+      alert("El Banco se ha agregado correctamente");
     } catch (error) {
-      console.error('Error al agregar el banco:', error);
+      console.error('Error al guardar nuevo Banco:', error);
+      // Mostrar alerta de error
+      alert("Error al guardar nuevo Banco. Por favor, revise los campos e inténtelo de nuevo");
     }
   };
 
 
   return (
+    <div>
+      {/* Navbar */}
+      <nav
+        className="navbar navbar-expand-lg navbar-dark border-bottom border-body"
+        style={{
+          background: '#2c3e50',
+          background: '-webkit-linear-gradient(to right, #3498db, #2c3e50)',
+          background: 'linear-gradient(to right, #3498db, #2c3e50)'
+        }}
+        data-bs-theme="dark"
+      >
+        <div className="container-fluid">
+          <Link to="/menu" className="navbar-brand">
+            Dashboard
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <Link to="/menu/maestro" className="nav-link">
+                Maestro
+              </Link>
+              <Link to="/menu/bancos" className="nav-link">
+                Bancos
+              </Link>
+              <Link to="/menu/bancos/agregar" className="nav-link">
+                Agregar
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <hr />
+      {/* Contenedor del formulario */}
     <div className="container mt-4">
       <h2>Agregar Banco</h2>
       <form onSubmit={handleSubmit}>
@@ -152,6 +199,7 @@ const FormBanco = () => {
           Agregar Banco
         </button>
       </form>
+    </div>
     </div>
   );
 };

@@ -101,13 +101,9 @@ const ListarProveedores = () => {
               <Link to="/menu/maestro" className="nav-link">
                 Maestro
               </Link>
-              <Link to="/menu/maestro/organizacion" className="nav-link">
+              <Link to="/menu/proveedores" className="nav-link">
                 Proveedores
               </Link>
-              {/* Use a button instead of an anchor for a disabled link */}
-              <button className="nav-link disabled" aria-disabled="true">
-                Nueva Area
-              </button>
             </div>
           </div>
         </div>
@@ -140,7 +136,7 @@ const ListarProveedores = () => {
             <th>Fecha de Inicio</th>
             <th>Rubro</th>
             <th>Comentarios</th>
-            <th>Contactos</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>

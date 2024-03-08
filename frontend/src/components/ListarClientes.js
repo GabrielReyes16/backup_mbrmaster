@@ -100,12 +100,8 @@ const ListaClientes = () => {
                 Maestro
               </Link>
               <Link to="/menu/maestro/organizacion" className="nav-link">
-                Organizacion
+                Clientes
               </Link>
-              {/* Use a button instead of an anchor for a disabled link */}
-              <button className="nav-link disabled" aria-disabled="true">
-                Nueva Area
-              </button>
             </div>
           </div>
         </div>

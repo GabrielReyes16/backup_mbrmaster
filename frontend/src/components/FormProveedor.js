@@ -155,8 +155,11 @@ const FormProveedor = () => {
       ]);
       setImpuestoSeleccionado('');
       setTipoPagoSeleccionado('');
+      alert("El proveedor se ha agregado correctamente");
     } catch (error) {
       console.error('Error al guardar nuevo proveedor:', error);
+      // Mostrar alerta de error
+      alert("Error al guardar nuevo proveedor. Por favor, revise los campos e inténtelo de nuevo");
     }
   };
 
@@ -266,6 +269,7 @@ const FormProveedor = () => {
                   name="ruc_dni"
                   value={datosProveedor.ruc_dni}
                   onChange={handleChangeProveedor}
+                  required
                 />
               </div>
 
@@ -277,6 +281,7 @@ const FormProveedor = () => {
                   name="nombre_razon_social"
                   value={datosProveedor.nombre_razon_social}
                   onChange={handleChangeProveedor}
+                  required
                 />
               </div>
 
@@ -288,6 +293,7 @@ const FormProveedor = () => {
                   name="fecha_inicio"
                   value={datosProveedor.fecha_inicio}
                   onChange={handleChangeProveedor}
+                  required
                 />
               </div>
 
@@ -299,6 +305,7 @@ const FormProveedor = () => {
                   name="rubro_actividad_economica"
                   value={datosProveedor.rubro_actividad_economica}
                   onChange={handleChangeProveedor}
+                  required
                 />
               </div>
 
@@ -310,6 +317,7 @@ const FormProveedor = () => {
                   name="comentarios"
                   value={datosProveedor.comentarios}
                   onChange={handleChangeProveedor}
+                  required
                 />
               </div>
 
@@ -325,6 +333,7 @@ const FormProveedor = () => {
                       name="direccion"
                       value={direccion.direccion}
                       onChange={(e) => handleChangeDireccion(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -335,6 +344,7 @@ const FormProveedor = () => {
                       name="distrito"
                       value={direccion.distrito}
                       onChange={(e) => handleChangeDireccion(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -345,6 +355,7 @@ const FormProveedor = () => {
                       name="provincia"
                       value={direccion.provincia}
                       onChange={(e) => handleChangeDireccion(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -355,6 +366,7 @@ const FormProveedor = () => {
                       name="departamento"
                       value={direccion.departamento}
                       onChange={(e) => handleChangeDireccion(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -365,6 +377,7 @@ const FormProveedor = () => {
                       name="pais"
                       value={direccion.pais}
                       onChange={(e) => handleChangeDireccion(index, e)}
+                      required
                     />
                   </div>
                   {/* Botón para eliminar dirección */}
@@ -397,6 +410,7 @@ const FormProveedor = () => {
                       name="nombre"
                       value={contacto.nombre}
                       onChange={(e) => handleChangeContacto(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -407,6 +421,7 @@ const FormProveedor = () => {
                       name="cargo"
                       value={contacto.cargo}
                       onChange={(e) => handleChangeContacto(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -417,6 +432,7 @@ const FormProveedor = () => {
                       name="telefono"
                       value={contacto.telefono}
                       onChange={(e) => handleChangeContacto(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -427,6 +443,7 @@ const FormProveedor = () => {
                       name="correo"
                       value={contacto.correo}
                       onChange={(e) => handleChangeContacto(index, e)}
+                      required
                     />
                   </div>
                   {/* Botón para eliminar contacto */}
@@ -459,6 +476,7 @@ const FormProveedor = () => {
                       name="entidad"
                       value={banco.entidad}
                       onChange={(e) => handleChangeDatosBancarios(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -469,6 +487,7 @@ const FormProveedor = () => {
                       name="numero_de_cuenta"
                       value={banco.numero_de_cuenta}
                       onChange={(e) => handleChangeDatosBancarios(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -479,6 +498,7 @@ const FormProveedor = () => {
                       name="cci"
                       value={banco.cci}
                       onChange={(e) => handleChangeDatosBancarios(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -489,6 +509,7 @@ const FormProveedor = () => {
                       name="tipo_de_cuenta"
                       value={banco.tipo_de_cuenta}
                       onChange={(e) => handleChangeDatosBancarios(index, e)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -499,6 +520,7 @@ const FormProveedor = () => {
                       name="moneda"
                       value={banco.moneda}
                       onChange={(e) => handleChangeDatosBancarios(index, e)}
+                      required
                     />
                   </div>
                   {/* Botón para eliminar datos bancarios */}
@@ -525,6 +547,7 @@ const FormProveedor = () => {
                   className="form-select"
                   value={tipoPagoSeleccionado}
                   onChange={(e) => setTipoPagoSeleccionado(e.target.value)}
+                  required
                 >
                   <option value="">Seleccionar tipo de pago</option>
                   {tiposPago.map(tipo => (
@@ -539,6 +562,7 @@ const FormProveedor = () => {
                   className="form-select"
                   value={impuestoSeleccionado}
                   onChange={(e) => setImpuestoSeleccionado(e.target.value)}
+                  required
                 >
                   <option value="">Seleccionar impuesto</option>
                   {impuestosDisponibles.map(impuesto => (

@@ -11,7 +11,6 @@ const EditarClienteModal = ({ isOpen, onRequestClose, clienteId }) => {
   const [direcciones, setDirecciones] = useState([]);
   const [editedDirecciones, setEditedDirecciones] = useState([]);
   const [nuevasDirecciones, setNuevasDirecciones] = useState([]);
-
   useEffect(() => {
     const fetchCliente = async () => {
       try {
@@ -157,9 +156,12 @@ const EditarClienteModal = ({ isOpen, onRequestClose, clienteId }) => {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
         },
         content: {
-          width: '400px',
+          width: '60%',
+          maxWidth: '600px',
           margin: 'auto',
+          borderRadius: '8px',
           padding: '20px',
+          textAlign: 'center' // Centra el contenido del modal
         }
       }}
     >
@@ -342,11 +344,11 @@ const EditarClienteModal = ({ isOpen, onRequestClose, clienteId }) => {
                 </div>
               ))}
               {/* Botón para agregar nueva dirección */}
-              <button type="button" onClick={handleAgregarNuevaDireccion} className="btn btn-primary">Agregar direccion</button>
+              <button type="button" onClick={handleAgregarNuevaDireccion} className="btn btn-primary mt-4">Agregar direccion</button>
             </div>
 
             {/* Botón de guardar */}
-            <button type="submit" className="btn btn-primary">Guardar Cambios</button>
+            <button type="submit" className="btn btn-success mt-4">Guardar Cambios</button>
           </form>
         )}
       </div>

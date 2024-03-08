@@ -11,6 +11,94 @@ const EditarProveedorModal = ({ isOpen, onRequestClose, clienteId }) => {
   const [direcciones, setDirecciones] = useState([]);
   const [editedDirecciones, setEditedDirecciones] = useState([]);
   const [nuevasDirecciones, setNuevasDirecciones] = useState([]);
+  const [tiposPago, setTiposPago] = useState([]);
+  const [personaTiposPago, setPersonaTiposPago] = useState([]);
+  const [impuestos, setImpuestos] = useState([]);
+  const [personaImpuestosAsociados, setPersonaImpuestosAsociados] = useState([]);
+  const [impuestosDisponibles, setImpuestosDisponibles] = useState([]);
+  const [impuestoSeleccionado, setImpuestoSeleccionado] = useState(''); // Nuevo estado para impuesto seleccionado
+  const [tipoPagoSeleccionado, setTipoPagoSeleccionado] = useState('');
+
+  useEffect(() => {
+    const listarTiposPago = async () => {
+      try {
+        const response = await api.listarTiposPago();
+        setTiposPago(response);
+      } catch (error) {
+        console.error('Error al obtener los tipos de pago:', error);
+      }
+    };
+
+    listarTiposPago();
+  }, []);
+
+  useEffect(() => {
+    const fetchImpuestos = async () => {
+      try {
+        const impuestosResponse = await api.listarImpuestosAsociados();
+        setImpuestosDisponibles(impuestosResponse);
+      } catch (error) {
+        console.error('Error al obtener los impuestos:', error);
+      }
+    };
+
+    fetchImpuestos();
+  }, []);
+
+  useEffect(() => {
+    const fetchTiposPago = async () => {
+      try {
+        const responseTiposPago = await api.listarTiposPago();
+        const responsePersonaTiposPago = await api.listarPersonaTiposPago();
+        setTiposPago(responseTiposPago);
+        setPersonaTiposPago(responsePersonaTiposPago);
+      } catch (error) {
+        console.error('Error al obtener tipos de pago:', error);
+      }
+    };
+
+    fetchTiposPago();
+  }, []);
+
+  useEffect(() => {
+    const fetchImpuestos = async () => {
+      try {
+        const responseImpuestos = await api.listarImpuestosAsociados();
+        const responsePersonaImpuestosAsociados = await api.listarPersonaImpuestosAsociados();
+        setImpuestos(responseImpuestos);
+        setPersonaImpuestosAsociados(responsePersonaImpuestosAsociados);
+      } catch (error) {
+        console.error('Error al obtener impuestos:', error);
+      }
+    };
+
+    fetchImpuestos();
+  }, []);
+
+  const getTipoPago = (clienteId) => {
+    const tipoPagoId = personaTiposPago.find(item => item.personaId === clienteId)?.tipoPagoId;
+    const tipoPago = tiposPago.find(tipo => tipo.id === tipoPagoId);
+    return tipoPago ? tipoPago.tipo : 'No especificado';
+  };
+
+  const getImpuestosAsociados = (clienteId) => {
+    const impuestosAsociadosIds = personaImpuestosAsociados
+      .filter(item => item.personaId === clienteId)
+      .map(item => item.impuestoId);
+    const impuestosAsociados = impuestos.filter(impuesto => impuestosAsociadosIds.includes(impuesto.id));
+    return impuestosAsociados.map(impuesto => impuesto.impuesto).join(', ');
+  };
+
+  const getIdRegistroImpuestos = (clienteId) => {
+    const impuestoAsociado = personaImpuestosAsociados.find(item => item.personaId === clienteId);
+    return impuestoAsociado ? impuestoAsociado.id : null;
+  };
+
+  const getIdRegistroTipoPago = (clienteId) => {
+    const tipoPagoAsociado = personaTiposPago.find(item => item.personaId === clienteId);
+    return tipoPagoAsociado ? tipoPagoAsociado.id : null;
+  };
+
 
   useEffect(() => {
     const fetchCliente = async () => {
@@ -69,7 +157,7 @@ const EditarProveedorModal = ({ isOpen, onRequestClose, clienteId }) => {
   const handleGuardarCambios = async (event) => {
     event.preventDefault();
     try {
-      await api.editarPersona(clienteId, editedCliente);
+      const proveedorResponse = await api.editarPersona(clienteId, editedCliente);
       for (let i = 0; i < contactos.length; i++) {
         await api.editarContacto(contactos[i].id, contactos[i]);
       }
@@ -86,6 +174,20 @@ const EditarProveedorModal = ({ isOpen, onRequestClose, clienteId }) => {
       for (let i = 0; i < nuevasDirecciones.length; i++) {
         await api.addDireccion(nuevasDirecciones[i]);
       }
+
+      const idRegistroTipoPago = getIdRegistroTipoPago(clienteId);
+      const idRegistroImpuestos = getIdRegistroImpuestos(clienteId);
+
+      if (impuestoSeleccionado !== '') {
+        await api.editarPersonaImpuestosAsociados(idRegistroImpuestos, { personaId: proveedorResponse.id, impuestoId: impuestoSeleccionado });
+        
+      }
+
+      if (tipoPagoSeleccionado !== '') {
+        
+        await api.editarPersonaTipoPago(idRegistroTipoPago, { personaId: proveedorResponse.id, tipoPagoId: tipoPagoSeleccionado });
+      }
+
 
       onRequestClose(); // Cierra el modal después de editar el cliente
       window.location.reload(); // Recarga la página para ver los cambios
@@ -345,6 +447,49 @@ const EditarProveedorModal = ({ isOpen, onRequestClose, clienteId }) => {
               <button type="button" onClick={handleAgregarNuevaDireccion} className="btn btn-primary">Agregar direccion</button>
             </div>
 
+            <div className="form-group">
+              <label>Cambiar Impuestos Asociados:</label>
+              <input type="text" className="form-control" value={getImpuestosAsociados(cliente.id)} readOnly />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Impuesto:</label>
+              <select
+                className="form-select"
+                value={impuestoSeleccionado}
+                onChange={(e) => setImpuestoSeleccionado(e.target.value)}
+              >
+                <option value="">Seleccionar impuesto</option>
+                {impuestosDisponibles.map(impuesto => (
+                  <option key={impuesto.id} value={impuesto.id}>{impuesto.impuesto}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Tipo de Pago:</label>
+              <input type="text" className="form-control" value={getTipoPago(cliente.id)} readOnly />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Cambiar de Pago:</label>
+              <select
+                className="form-select"
+                value={tipoPagoSeleccionado}
+                onChange={(e) => setTipoPagoSeleccionado(e.target.value)}
+              >
+                <option value="">Seleccionar tipo de pago</option>
+                {tiposPago.map(tipo => (
+                  <option key={tipo.id} value={tipo.id}>{tipo.tipo}</option>
+                ))}
+              </select>
+            </div> 
+
+
+
+
+
+
             {/* Botón de guardar */}
             <button type="submit" className="btn btn-primary">Guardar Cambios</button>
           </form>
@@ -353,5 +498,6 @@ const EditarProveedorModal = ({ isOpen, onRequestClose, clienteId }) => {
     </Modal>
   );
 };
+
 
 export default EditarProveedorModal;

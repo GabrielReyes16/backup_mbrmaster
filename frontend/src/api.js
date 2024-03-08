@@ -654,7 +654,7 @@ async listarPersonaTiposPago() {
 
 async listarPersonaImpuestosAsociados() {
   try {
-    const response = await fetch(`${API_BASE_URL}/v1/personaImpuestosAsociados`, {
+    const response = await fetch(`${API_BASE_URL}/v1/personaImpuestosAsociados/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -668,6 +668,55 @@ async listarPersonaImpuestosAsociados() {
     throw error;
   }
 },
+
+async editarPersonaImpuestosAsociados(id, datosPersonaImpuestosAsociados) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaImpuestosAsociados/${id}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosPersonaImpuestosAsociados),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al editar datosPersonaImpuestosAsociados ');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar datosPersonaImpuestosAsociados :', error);
+    throw error;
+  }
+},
+
+async editarPersonaTipoPago(id, datosPersonaTipoPago) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/v1/personaTiposPago/${id}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(datosPersonaTipoPago),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al editar datosPersonaTipoPago ');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al editar datosPersonaTipoPago :', error);
+    throw error;
+  }
+},
+
+
+
 
 
 
